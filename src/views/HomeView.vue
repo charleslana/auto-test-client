@@ -33,7 +33,7 @@
             class="column is-10-mobile is-10-tablet is-4-desktop is-7-widescreen is-4-fullhd is-offset-1-fullhd"
           >
             <figure class="image is-square">
-              <img src="@/assets/images/bg1.svg" />
+              <img src="@/assets/images/bg1.svg" alt="bg1 svg image" />
             </figure>
           </div>
         </div>
@@ -49,7 +49,7 @@
             class="column is-10-mobile is-offset-1-mobile is-10-tablet is-offset-1-tablet is-4-desktop is-offset-1-desktop is-4-widescreen is-offset-1-widescreen is-4-fullhd is-offset-1-fullhd"
           >
             <figure class="image is-square">
-              <img src="@/assets/images/bg2.svg" />
+              <img src="@/assets/images/bg2.svg" alt="bg2 svg image" />
             </figure>
           </div>
           <div
@@ -83,7 +83,7 @@
             class="column is-10-mobile is-offset-1-mobile is-10-tablet is-offset-1-tablet is-4-desktop is-offset-1-desktop is-4-widescreen is-offset-1-widescreen is-4-fullhd is-offset-1-fullhd"
           >
             <figure class="image is-square">
-              <img src="@/assets/images/bg3.svg" />
+              <img src="@/assets/images/bg3.svg" alt="bg3 svg image" />
             </figure>
           </div>
         </div>

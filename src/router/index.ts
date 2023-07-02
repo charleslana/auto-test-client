@@ -11,9 +11,9 @@ const router = createRouter({
       meta: { title: 'Auto test - Ferramenta para testers!' }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/:catchAll(.*)',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue')
     }
   ]
 });
