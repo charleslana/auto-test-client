@@ -1,10 +1,10 @@
 <template>
-  <header>
+  <!-- <header>
     <nav>
       <RouterLink to="/">Home page</RouterLink>
       <RouterLink to="/about">About page</RouterLink>
     </nav>
-  </header>
+  </header> -->
 
   <RouterView />
 </template>

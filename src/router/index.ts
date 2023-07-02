@@ -7,7 +7,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { title: 'Auto test - Ferramenta para testers!' }
     },
     {
       path: '/about',
@@ -15,6 +16,20 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
+});
+
+interface RouteMeta {
+  title?: string;
+}
+
+router.beforeEach((to, from, next) => {
+  const meta = to.meta as RouteMeta;
+  if (meta && meta.title) {
+    document.title = meta.title;
+  } else {
+    document.title = 'Bem vindo';
+  }
+  next();
 });
 
 export default router;
