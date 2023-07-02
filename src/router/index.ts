@@ -1,3 +1,4 @@
+import DashboardView from '../views/panel/DashboardView.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
@@ -28,6 +29,12 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
       meta: { title: 'Auto test - Cadastro' }
+    },
+    {
+      path: '/panel/dashboard',
+      name: 'panel-dashboard',
+      component: DashboardView,
+      meta: { title: 'Auto test - Dashboard' }
     }
   ]
 });

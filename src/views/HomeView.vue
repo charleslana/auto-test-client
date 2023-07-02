@@ -24,8 +24,8 @@
           >
             <h1 class="title titled is-1 mb-6">Ferramenta especial para testers!</h1>
             <div class="buttons">
-              <button class="button">Cadastre-se</button>
-              <button class="button">Ou acesse suas ferramentas agora</button>
+              <RouterLink to="/register" class="button">Cadastre-se</RouterLink>
+              <RouterLink to="/login" class="button">Ou acesse suas ferramentas agora</RouterLink>
             </div>
           </div>
           <div
