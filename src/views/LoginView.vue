@@ -10,13 +10,7 @@
             <form>
               <div class="field">
                 <div class="control">
-                  <input
-                    class="input is-large"
-                    type="email"
-                    placeholder="Seu e-mail"
-                    autofocus
-                    required
-                  />
+                  <input class="input is-large" type="email" placeholder="Seu e-mail" required />
                 </div>
               </div>
               <div class="field">
