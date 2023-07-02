@@ -9,8 +9,8 @@
       <div class="navbar-end">
         <a class="navbar-item is-uppercase" href="#why">Por que usar?</a>
         <a class="navbar-item is-uppercase" href="#free">É grátis</a>
-        <a class="navbar-item is-uppercase">Login</a>
-        <a class="navbar-item is-uppercase">Registrar</a>
+        <RouterLink to="/login" class="navbar-item is-uppercase">Login</RouterLink>
+        <RouterLink to="/register" class="navbar-item is-uppercase">Criar conta</RouterLink>
       </div>
     </div>
   </nav>
@@ -109,7 +109,9 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from 'vue-router';
+</script>
 
 <style scoped>
 .titled {

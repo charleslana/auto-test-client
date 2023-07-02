@@ -1,4 +1,5 @@
 import HomeView from '../views/HomeView.vue';
+import LoginView from '../views/LoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -14,6 +15,12 @@ const router = createRouter({
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+      meta: { title: 'Auto test - Login' }
     }
   ]
 });
