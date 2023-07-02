@@ -13,7 +13,7 @@
         <div class="navbar-start">
           <RouterLink to="/panel/dashboard" class="navbar-item">Dashboard</RouterLink>
           <RouterLink to="/panel/settings" class="navbar-item">Configurações</RouterLink>
-          <RouterLink to="/panel/dashboard" class="navbar-item">Conquistas</RouterLink>
+          <RouterLink to="/panel/conquest" class="navbar-item">Conquistas</RouterLink>
           <RouterLink to="/panel/rank" class="navbar-item">Classificação</RouterLink>
           <a class="navbar-item" @click="redirect">Logout</a>
         </div>
@@ -50,5 +50,10 @@ nav.navbar {
 
 .navbar-item.brand-text {
   font-weight: 300;
+}
+
+.navbar-item {
+  font-size: 14px;
+  font-weight: 700;
 }
 </style>

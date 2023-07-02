@@ -1,40 +1,76 @@
 <template>
   <aside class="menu is-hidden-mobile">
-    <p class="menu-label">General</p>
+    <p class="menu-label">Geral</p>
     <ul class="menu-list">
-      <li><a class="is-active">Dashboard</a></li>
-      <li><a>Customers</a></li>
-      <li><a>Other</a></li>
-    </ul>
-    <p class="menu-label">Administration</p>
-    <ul class="menu-list">
-      <li><a>Team Settings</a></li>
       <li>
-        <a>Manage Your Team</a>
-        <ul>
-          <li><a>Members</a></li>
-          <li><a>Plugins</a></li>
-          <li><a>Add a member</a></li>
-          <li><a>Remove a member</a></li>
-        </ul>
+        <RouterLink
+          to="/panel/dashboard"
+          :class="{ 'is-active': activePage === MenuComponentEnum.Dashboard }"
+          >{{ MenuComponentEnum.Dashboard }}</RouterLink
+        >
       </li>
-      <li><a>Invitations</a></li>
-      <li><a>Cloud Storage Environment Settings</a></li>
-      <li><a>Authentication</a></li>
-      <li><a>Payments</a></li>
+      <li>
+        <RouterLink
+          to="/panel/dashboard"
+          :class="{ 'is-active': activePage === MenuComponentEnum.Profile }"
+          >{{ MenuComponentEnum.Profile }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/dashboard"
+          :class="{ 'is-active': activePage === MenuComponentEnum.Items }"
+          >{{ MenuComponentEnum.Items }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/dashboard"
+          :class="{ 'is-active': activePage === MenuComponentEnum.Historic }"
+          >{{ MenuComponentEnum.Historic }}</RouterLink
+        >
+      </li>
     </ul>
-    <p class="menu-label">Transactions</p>
+    <p class="menu-label">Ferramentas iniciais</p>
     <ul class="menu-list">
-      <li><a>Payments</a></li>
-      <li><a>Transfers</a></li>
-      <li><a>Balance</a></li>
-      <li><a>Reports</a></li>
+      <li><a>Gerador de Testes</a></li>
+      <!-- <li>
+        <a>Menu</a>
+        <ul>
+          <li><a>Submenu</a></li>
+          <li><a>Submenu</a></li>
+          <li><a>Submenu</a></li>
+          <li><a>Submenu</a></li>
+        </ul>
+      </li> -->
+      <li><a>Gerador de Passo a Passo</a></li>
+      <li><a>Bug Report</a></li>
+    </ul>
+    <p class="menu-label">Ferramentas avançadas</p>
+    <ul class="menu-list">
+      <li><a>Plano de Testes</a></li>
+      <li><a>Indicadores de Qualidade</a></li>
+      <li><a>Tradutor de Testes</a></li>
+      <li><a>Casos de Testes de Usabilidade (UX)</a></li>
+      <li><a>Gerador de Massa de Testes</a></li>
+      <li><a>Linguagem Gherkin</a></li>
+      <li><a>Testes de Segurança</a></li>
+      <li><a>Testes de Performance</a></li>
+      <li><a>Testes de API</a></li>
+      <li><a>Construtor de Query SQL</a></li>
     </ul>
   </aside>
 </template>
 
 <script setup lang="ts">
 // import { RouterLink } from 'vue-router';
+import MenuComponentEnum from '../enum/menuComponentEnum';
+defineProps({
+  activePage: {
+    type: String as () => MenuComponentEnum,
+    required: true
+  }
+});
 </script>
 
 <style scoped>

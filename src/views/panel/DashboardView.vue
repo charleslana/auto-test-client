@@ -3,20 +3,16 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.Dashboard"></MenuComponent>
       </div>
       <div class="column is-9">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-          <ul>
-            <li><RouterLink to="/panel/dashboard">Painel</RouterLink></li>
-            <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
-          </ul>
-        </nav>
+        <BreadCrumbComponent pageName="Dashboard"></BreadCrumbComponent>
         <section class="hero is-info welcome is-small">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">Hello, Admin.</h1>
-              <h2 class="subtitle">I hope you are having a great day!</h2>
+              <h1 class="title">Olá, Charles, {{ greeting }}.</h1>
+              <h2 class="subtitle">Espero que você esteja tendo um ótimo dia!</h2>
+              <span>Aqui está suas execuções de testes realizadas totais</span>
             </div>
           </div>
         </section>
@@ -24,26 +20,92 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">439k</p>
-                <p class="subtitle">Users</p>
+                <p class="title">{{ numberFormat(439215) }}</p>
+                <p class="subtitle">Gerador de Testes</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title">59k</p>
-                <p class="subtitle">Products</p>
+                <p class="subtitle">Gerador de Passo a Passo</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title">3.4k</p>
-                <p class="subtitle">Open Orders</p>
+                <p class="subtitle">Bug Report</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title">19</p>
-                <p class="subtitle">Exceptions</p>
+                <p class="subtitle">Plano de Testes</p>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section class="info-tiles">
+          <div class="tile is-ancestor has-text-centered">
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Indicadores de Qualidade</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Tradutor de Testes</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Casos de Testes de Usabilidade (UX)</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Gerador de Massa de Testes</p>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section class="info-tiles">
+          <div class="tile is-ancestor has-text-centered">
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Linguagem Gherkin</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Testes de Segurança</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Testes de Performance</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Testes de API</p>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section class="info-tiles">
+          <div class="tile is-ancestor has-text-centered">
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title">0</p>
+                <p class="subtitle">Construtor de Query SQL</p>
               </article>
             </div>
           </div>
@@ -54,9 +116,26 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
 import NavBarComponent from '../../components/NavBarComponent.vue';
 import MenuComponent from '../../components/MenuComponent.vue';
+import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '../../enum/menuComponentEnum';
+import { ref, onMounted } from 'vue';
+import { numberFormat } from '../../utils/utils';
+
+const greeting = ref('');
+
+function getGreeting(): string {
+  const date = new Date();
+  const hour = date.getHours();
+  const greetingMessage =
+    hour >= 6 && hour < 12 ? 'Bom dia' : hour >= 12 && hour < 18 ? 'Boa tarde' : 'Boa noite';
+  return greetingMessage;
+}
+
+onMounted(() => {
+  greeting.value = getGreeting();
+});
 </script>
 
 <style scoped>
