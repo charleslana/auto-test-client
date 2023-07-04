@@ -17,7 +17,8 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 401 || error.response?.status === 429) {
+    const token = getTokenFromLocalStorage();
+    if (error.response?.status === 401 || error.response?.status === 429 || !token) {
       removeTokenFromLocalStorage();
       router.push({ name: 'login' });
     }

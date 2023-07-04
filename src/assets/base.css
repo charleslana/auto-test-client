@@ -42,3 +42,7 @@ body {
     background: #c4c4c4;
   }
 }
+
+.vue-skeletor--text {
+  border-radius: 0 !important;
+}
