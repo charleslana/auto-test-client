@@ -16,7 +16,7 @@
           <RouterLink to="/panel/conquest" class="navbar-item">Conquistas</RouterLink>
           <RouterLink to="/panel/shop" class="navbar-item">Loja</RouterLink>
           <RouterLink to="/panel/rank" class="navbar-item">Classificação</RouterLink>
-          <a class="navbar-item" @click="redirect">Logout</a>
+          <a class="navbar-item" @click="logout">Logout</a>
         </div>
       </div>
     </div>
@@ -25,13 +25,17 @@
 
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { removeTokenFromLocalStorage } from '@/utils/localStorageUtils';
+import { UserService } from '@/service/userService';
+import { handlerError } from '@/utils/utils';
 
 type RouteLocationRaw = import('vue-router').RouteLocationRaw;
 
 const router = useRouter();
 
-const redirect = () => {
+const logout = () => {
+  removeTokenFromLocalStorage();
   const rota: RouteLocationRaw = { name: 'home' };
   router.push(rota);
 };
@@ -41,6 +45,18 @@ const isMenuActive = ref(false);
 const toggleMenu = () => {
   isMenuActive.value = !isMenuActive.value;
 };
+
+onMounted(() => {
+  getUserDetails();
+});
+
+async function getUserDetails() {
+  try {
+    const response = await UserService.getDetails();
+  } catch (error: any) {
+    handlerError(error);
+  }
+}
 </script>
 
 <style scoped>

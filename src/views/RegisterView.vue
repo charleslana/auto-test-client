@@ -15,15 +15,27 @@
           <div class="column right has-text-centered">
             <h1 class="title is-4">Cadastre-se agora</h1>
             <p class="description">Ao infinito e além</p>
-            <form>
+            <form @submit.prevent="register">
               <div class="field">
                 <div class="control">
-                  <input class="input is-medium" type="email" placeholder="E-mail" required />
+                  <input
+                    class="input is-medium"
+                    type="email"
+                    placeholder="E-mail"
+                    required
+                    v-model="email"
+                  />
                 </div>
               </div>
               <div class="field">
                 <div class="control">
-                  <input class="input is-medium" type="password" placeholder="Senha" required />
+                  <input
+                    class="input is-medium"
+                    type="password"
+                    placeholder="Senha"
+                    required
+                    v-model="password"
+                  />
                 </div>
               </div>
               <div class="field">
@@ -33,10 +45,17 @@
                     type="password"
                     placeholder="Confirme a senha"
                     required
+                    v-model="passwordConfirmation"
                   />
                 </div>
               </div>
-              <button class="button is-block is-primary is-fullwidth is-medium">Cadastrar</button>
+              <button
+                class="button is-block is-primary is-fullwidth is-medium"
+                :class="{ 'is-loading': loading }"
+                :disabled="loading"
+              >
+                Cadastrar
+              </button>
               <br />
               <small
                 ><em
@@ -62,7 +81,65 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { UserService } from '@/service/userService';
+import { handlerError } from '@/utils/utils';
+import { saveTokenToLocalStorage } from '@/utils/localStorageUtils';
+
+const email = ref('');
+const password = ref('');
+const passwordConfirmation = ref('');
+const loading = ref(false);
+
+async function register(): Promise<void> {
+  try {
+    validateRegister();
+    loading.value = true;
+    await UserService.register({
+      email: email.value,
+      password: password.value,
+      passwordConfirmation: passwordConfirmation.value
+    });
+    await login();
+  } catch (error: any) {
+    loading.value = false;
+    handlerError(error);
+  }
+}
+
+function validateRegister(): void {
+  if (password.value.length < 6) {
+    throw new Error('A senha deve conter no mínimo 6 caracteres.');
+  }
+  if (password.value != passwordConfirmation.value) {
+    throw new Error('As senhas digitadas estão diferentes, verifique novamente.');
+  }
+}
+
+async function login(): Promise<void> {
+  try {
+    const response = await UserService.login({
+      email: email.value,
+      password: password.value
+    });
+    const accessToken = response.accessToken;
+    saveTokenToLocalStorage(accessToken);
+    redirect();
+  } catch (error: any) {
+    loading.value = false;
+    handlerError(error);
+  }
+}
+
+type RouteLocationRaw = import('vue-router').RouteLocationRaw;
+
+const router = useRouter();
+
+const redirect = () => {
+  const rota: RouteLocationRaw = { name: 'panel-dashboard' };
+  router.push(rota);
+};
 </script>
 
 <style scoped>

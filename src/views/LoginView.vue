@@ -7,18 +7,34 @@
           <hr class="login-hr" />
           <p class="subtitle has-text-black">Faça login para continuar.</p>
           <div class="box">
-            <form>
+            <form @submit.prevent="login">
               <div class="field">
                 <div class="control">
-                  <input class="input is-large" type="email" placeholder="Seu e-mail" required />
+                  <input
+                    class="input is-large"
+                    type="email"
+                    placeholder="Seu e-mail"
+                    required
+                    v-model="email"
+                  />
                 </div>
               </div>
               <div class="field">
                 <div class="control">
-                  <input class="input is-large" type="password" placeholder="Sua senha" required />
+                  <input
+                    class="input is-large"
+                    type="password"
+                    placeholder="Sua senha"
+                    required
+                    v-model="password"
+                  />
                 </div>
               </div>
-              <button class="button is-block is-info is-large is-fullwidth">
+              <button
+                class="button is-block is-info is-large is-fullwidth"
+                :class="{ 'is-loading': loading }"
+                :disabled="loading"
+              >
                 Login <i class="fa fa-sign-in" aria-hidden="true"></i>
               </button>
             </form>
@@ -34,7 +50,41 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { UserService } from '@/service/userService';
+import { handlerError } from '@/utils/utils';
+import { saveTokenToLocalStorage } from '../utils/localStorageUtils';
+
+const email = ref('');
+const password = ref('');
+const loading = ref(false);
+
+async function login(): Promise<void> {
+  try {
+    loading.value = true;
+    const response = await UserService.login({
+      email: email.value,
+      password: password.value
+    });
+    const accessToken = response.accessToken;
+    saveTokenToLocalStorage(accessToken);
+    redirect();
+  } catch (error: any) {
+    handlerError(error);
+  } finally {
+    loading.value = false;
+  }
+}
+
+type RouteLocationRaw = import('vue-router').RouteLocationRaw;
+
+const router = useRouter();
+
+const redirect = () => {
+  const rota: RouteLocationRaw = { name: 'panel-dashboard' };
+  router.push(rota);
+};
 </script>
 
 <style scoped></style>
