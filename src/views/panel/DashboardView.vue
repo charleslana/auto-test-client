@@ -10,7 +10,8 @@
         <section class="hero is-info welcome is-small">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">Olá, {{ name }}, {{ greeting }}.</h1>
+              <h1 class="title" v-if="loadingName"><Skeletor /></h1>
+              <h1 class="title" v-if="!loadingName">Olá, {{ name }}, {{ greeting }}.</h1>
               <h2 class="subtitle">Espero que você esteja tendo um ótimo dia!</h2>
               <span>Aqui está suas execuções de testes realizadas totais</span>
             </div>
@@ -20,25 +21,29 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">{{ numberFormat(439215) }}</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.testGenerator) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Gerador de Testes</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">59k</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.stepGenerator) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Gerador de Passo a Passo</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">3.4k</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.bugReport) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Bug Report</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">19</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.testPlan) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Plano de Testes</p>
               </article>
             </div>
@@ -48,25 +53,37 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.qualityIndicator) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Indicadores de Qualidade</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.testTranslator) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Tradutor de Testes</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.usabilityTestCase) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Casos de Testes de Usabilidade (UX)</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.testMassGenerator) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Gerador de Massa de Testes</p>
               </article>
             </div>
@@ -76,25 +93,33 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.gherkinLanguage) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Linguagem Gherkin</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.securityTest) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Testes de Segurança</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.performanceTest) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Testes de Performance</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">{{ numberFormat(response.apiTest) }}</p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Testes de API</p>
               </article>
             </div>
@@ -104,7 +129,10 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title">0</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ numberFormat(response.sqlQueryBuilder) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">Construtor de Query SQL</p>
               </article>
             </div>
@@ -122,6 +150,10 @@
       <section class="modal-card-body">
         <p>Parece que você é novo aqui!, vamos completar seu cadastro, é fácil!</p>
         <br />
+        <div class="notification is-warning">
+          Seu nome é único, você pode inserir um apelido, mas fique tranquilo que você poderá
+          alterar-lo depois!
+        </div>
         <form @submit.prevent="updateUserName">
           <div class="field">
             <div class="control">
@@ -158,6 +190,8 @@ import { UserService } from '@/service/userService';
 import { handlerError, showToast } from '@/utils/utils';
 import type IUser from '@/interface/IUser';
 import ToastEnum from '@/enum/toastEnum';
+import type ITest from '@/interface/ITest';
+import { Skeletor } from 'vue-skeletor';
 
 const greeting = ref('');
 
@@ -169,15 +203,19 @@ function getGreeting(): string {
   return greetingMessage;
 }
 
-onMounted(() => {
+onMounted(async () => {
   greeting.value = getGreeting();
-  getUserDetails();
+  await getUserDetails();
+  await getUserTestCount();
 });
+
+const loadingName = ref(true);
 
 async function getUserDetails(): Promise<void> {
   try {
     const response = (await UserService.getDetails()) as IUser;
     showUserNameModal(response.name);
+    loadingName.value = false;
   } catch (error: any) {
     handlerError(error);
   }
@@ -225,6 +263,37 @@ async function updateUserName(): Promise<void> {
 function validateUserName(name: string): void {
   if (name.trim() == '') {
     throw new Error('Você deve preencher seu nome corretamente');
+  }
+}
+
+const loadingCount = ref(true);
+
+const response = ref<ITest>(createEmptyTest());
+
+function createEmptyTest(): ITest {
+  return {
+    testGenerator: 0,
+    stepGenerator: 0,
+    bugReport: 0,
+    testPlan: 0,
+    qualityIndicator: 0,
+    testTranslator: 0,
+    usabilityTestCase: 0,
+    testMassGenerator: 0,
+    gherkinLanguage: 0,
+    securityTest: 0,
+    performanceTest: 0,
+    apiTest: 0,
+    sqlQueryBuilder: 0
+  };
+}
+
+async function getUserTestCount(): Promise<void> {
+  try {
+    response.value = (await UserService.getTestCount()) as ITest;
+    loadingCount.value = false;
+  } catch (error: any) {
+    handlerError(error);
   }
 }
 </script>

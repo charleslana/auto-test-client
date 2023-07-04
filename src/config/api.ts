@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import router from '@/router';
-import { getTokenFromLocalStorage } from '@/utils/localStorageUtils';
+import { getTokenFromLocalStorage, removeTokenFromLocalStorage } from '@/utils/localStorageUtils';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL as string
@@ -17,8 +17,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
-      router.push({ name: 'home' });
+    if (error.response?.status === 401 || error.response?.status === 429) {
+      removeTokenFromLocalStorage();
+      router.push({ name: 'login' });
     }
     return Promise.reject(error);
   }

@@ -6,5 +6,5 @@ export default interface IUser {
   level: number;
   experience: number;
   score: number;
-  createdAt: number;
+  createdAt: Date;
 }

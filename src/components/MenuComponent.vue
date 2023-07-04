@@ -33,7 +33,13 @@
     </ul>
     <p class="menu-label">Ferramentas iniciais</p>
     <ul class="menu-list">
-      <li><a>Gerador de Testes</a></li>
+      <li>
+        <RouterLink
+          to="/panel/test-generator"
+          :class="{ 'is-active': activePage === MenuComponentEnum.TestGenerator }"
+          >{{ MenuComponentEnum.TestGenerator }}</RouterLink
+        >
+      </li>
       <!-- <li>
         <a>Menu</a>
         <ul>

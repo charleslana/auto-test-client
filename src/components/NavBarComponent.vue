@@ -34,7 +34,7 @@ const router = useRouter();
 
 const logout = (): void => {
   removeTokenFromLocalStorage();
-  const route: RouteLocationRaw = { name: 'home' };
+  const route: RouteLocationRaw = { name: 'login' };
   router.push(route);
 };
 

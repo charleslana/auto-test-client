@@ -24,4 +24,9 @@ export class UserService {
     });
     return response.data;
   }
+
+  static async getTestCount() {
+    const response = await api.get('/user/test/count');
+    return response.data;
+  }
 }

@@ -1,4 +1,6 @@
+import router from '@/router';
 import ToastEnum from '@/enum/toastEnum';
+import { getTokenFromLocalStorage } from './localStorageUtils';
 import { toast } from 'bulma-toast';
 
 export function numberFormat(number: number): string {
@@ -25,8 +27,17 @@ export function handlerError(error: any): void {
   if (error.response && error.response.data.validation) {
     return showToast(error.response.data.validation.body.message, ToastEnum.Danger);
   }
-  if (error.response) {
+  if (error.response && error.response.data.message) {
     return showToast(error.response.data.message, ToastEnum.Danger);
   }
   showToast(error.message, ToastEnum.Danger);
+}
+
+export function redirectToDashboardPage(): void {
+  const getToken = getTokenFromLocalStorage();
+  if (getToken != null) {
+    type RouteLocationRaw = import('vue-router').RouteLocationRaw;
+    const route: RouteLocationRaw = { name: 'panel-dashboard' };
+    router.push(route);
+  }
 }

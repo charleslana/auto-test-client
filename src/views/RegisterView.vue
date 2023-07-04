@@ -82,10 +82,14 @@
 
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { UserService } from '@/service/userService';
-import { handlerError } from '@/utils/utils';
+import { handlerError, redirectToDashboardPage } from '@/utils/utils';
 import { saveTokenToLocalStorage } from '@/utils/localStorageUtils';
+
+onMounted(() => {
+  redirectToDashboardPage();
+});
 
 const email = ref('');
 const password = ref('');

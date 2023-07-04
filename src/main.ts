@@ -5,6 +5,7 @@ import './assets/lib/bulma/css/bulma.min.css';
 import './assets/lib/aos/aos.css';
 import './assets/main.css';
 import 'animate.css';
+import 'vue-skeletor/dist/vue-skeletor.css';
 
 const app = createApp(App);
 

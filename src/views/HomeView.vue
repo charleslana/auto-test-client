@@ -110,7 +110,13 @@
 </template>
 
 <script setup lang="ts">
+import { redirectToDashboardPage } from '@/utils/utils';
+import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
+
+onMounted(() => {
+  redirectToDashboardPage();
+});
 </script>
 
 <style scoped>

@@ -2,6 +2,7 @@ import DashboardView from '../views/panel/DashboardView.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import TestGeneratorView from '../views/panel/TestGeneratorView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -35,6 +36,12 @@ const router = createRouter({
       name: 'panel-dashboard',
       component: DashboardView,
       meta: { title: 'Auto test - Dashboard' }
+    },
+    {
+      path: '/panel/test-generator',
+      name: 'panel-test-generator',
+      component: TestGeneratorView,
+      meta: { title: 'Auto test - Gerador de Testes' }
     }
   ]
 });
