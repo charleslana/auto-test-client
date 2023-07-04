@@ -13,6 +13,7 @@ export function showToast(message: string, type: ToastEnum): void {
     dismissible: true,
     duration: 3000,
     single: true,
+    pauseOnHover: true,
     animate: { in: 'fadeIn', out: 'fadeOut' }
   });
 }

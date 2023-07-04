@@ -81,9 +81,9 @@ type RouteLocationRaw = import('vue-router').RouteLocationRaw;
 
 const router = useRouter();
 
-const redirect = () => {
-  const rota: RouteLocationRaw = { name: 'panel-dashboard' };
-  router.push(rota);
+const redirect = (): void => {
+  const route: RouteLocationRaw = { name: 'panel-dashboard' };
+  router.push(route);
 };
 </script>
 

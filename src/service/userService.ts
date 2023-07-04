@@ -17,4 +17,11 @@ export class UserService {
     const response = await api.get('/user/details');
     return response.data;
   }
+
+  static async updateName(name: string) {
+    const response = await api.put('/user/change-name', {
+      name
+    });
+    return response.data;
+  }
 }

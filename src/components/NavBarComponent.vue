@@ -25,38 +25,24 @@
 
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { removeTokenFromLocalStorage } from '@/utils/localStorageUtils';
-import { UserService } from '@/service/userService';
-import { handlerError } from '@/utils/utils';
 
 type RouteLocationRaw = import('vue-router').RouteLocationRaw;
 
 const router = useRouter();
 
-const logout = () => {
+const logout = (): void => {
   removeTokenFromLocalStorage();
-  const rota: RouteLocationRaw = { name: 'home' };
-  router.push(rota);
+  const route: RouteLocationRaw = { name: 'home' };
+  router.push(route);
 };
 
 const isMenuActive = ref(false);
 
-const toggleMenu = () => {
+const toggleMenu = (): void => {
   isMenuActive.value = !isMenuActive.value;
 };
-
-onMounted(() => {
-  getUserDetails();
-});
-
-async function getUserDetails() {
-  try {
-    const response = await UserService.getDetails();
-  } catch (error: any) {
-    handlerError(error);
-  }
-}
 </script>
 
 <style scoped>
