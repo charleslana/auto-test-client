@@ -7,8 +7,8 @@
       </div>
       <div class="column is-9">
         <BreadCrumbComponent pageName="Gerador de Testes"></BreadCrumbComponent>
-        <BlockedPageComponent pageName="Gerador de Testes" v-if="open" />
-        <div v-if="!open"><h1>Gerador de Testes</h1></div>
+        <BlockedPageComponent pageName="Gerador de Testes" v-if="!open" />
+        <div v-if="open"><h1>Gerador de Testes</h1></div>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.SQLQueryBuilder)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);

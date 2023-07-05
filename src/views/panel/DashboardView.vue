@@ -6,7 +6,7 @@
         <MenuComponent :activePage="MenuComponentEnum.Dashboard"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent pageName="Dashboard"></BreadCrumbComponent>
+        <BreadCrumbComponent :pageName="MenuComponentEnum.Dashboard"></BreadCrumbComponent>
         <section class="hero is-info welcome is-small">
           <div class="hero-body">
             <div class="container">
@@ -23,28 +23,28 @@
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.testGenerator) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Gerador de Testes</p>
+                <p class="subtitle">{{ MenuComponentEnum.TestGenerator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.stepGenerator) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Gerador de Passo a Passo</p>
+                <p class="subtitle">{{ MenuComponentEnum.StepGenerator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.bugReport) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Bug Report</p>
+                <p class="subtitle">{{ MenuComponentEnum.BugReport }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.testPlan) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Plano de Testes</p>
+                <p class="subtitle">{{ MenuComponentEnum.TestPlan }}</p>
               </article>
             </div>
           </div>
@@ -57,7 +57,7 @@
                   {{ numberFormat(response.qualityIndicator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Indicadores de Qualidade</p>
+                <p class="subtitle">{{ MenuComponentEnum.QualityIndicator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
@@ -66,7 +66,7 @@
                   {{ numberFormat(response.testTranslator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Tradutor de Testes</p>
+                <p class="subtitle">{{ MenuComponentEnum.TestTranslator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
@@ -75,7 +75,7 @@
                   {{ numberFormat(response.usabilityTestCase) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Casos de Testes de Usabilidade (UX)</p>
+                <p class="subtitle">{{ MenuComponentEnum.UsabilityTestCase }}</p>
               </article>
             </div>
             <div class="tile is-parent">
@@ -84,7 +84,7 @@
                   {{ numberFormat(response.testMassGenerator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Gerador de Massa de Testes</p>
+                <p class="subtitle">{{ MenuComponentEnum.TestMassGenerator }}</p>
               </article>
             </div>
           </div>
@@ -97,14 +97,14 @@
                   {{ numberFormat(response.gherkinLanguage) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Linguagem Gherkin</p>
+                <p class="subtitle">{{ MenuComponentEnum.GherkinLanguage }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.securityTest) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Testes de Segurança</p>
+                <p class="subtitle">{{ MenuComponentEnum.SecurityTest }}</p>
               </article>
             </div>
             <div class="tile is-parent">
@@ -113,14 +113,14 @@
                   {{ numberFormat(response.performanceTest) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Testes de Performance</p>
+                <p class="subtitle">{{ MenuComponentEnum.PerformanceTest }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">{{ numberFormat(response.apiTest) }}</p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Testes de API</p>
+                <p class="subtitle">{{ MenuComponentEnum.APITest }}</p>
               </article>
             </div>
           </div>
@@ -133,7 +133,7 @@
                   {{ numberFormat(response.sqlQueryBuilder) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
-                <p class="subtitle">Construtor de Query SQL</p>
+                <p class="subtitle">{{ MenuComponentEnum.SQLQueryBuilder }}</p>
               </article>
             </div>
           </div>

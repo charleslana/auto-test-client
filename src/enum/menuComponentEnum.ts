@@ -5,7 +5,7 @@ enum MenuComponentEnum {
   Historic = 'Histórico',
   TestGenerator = 'Gerador de Testes',
   StepGenerator = 'Gerador de Passo a Passo',
-  BugReport = 'Bug Report',
+  BugReport = 'Relatório de Defeito',
   TestPlan = 'Plano de Testes',
   QualityIndicator = 'Indicadores de Qualidade',
   TestTranslator = 'Tradutor de Testes',

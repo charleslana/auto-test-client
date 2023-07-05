@@ -49,8 +49,20 @@
           <li><a>Submenu</a></li>
         </ul>
       </li> -->
-      <li><a>Gerador de Passo a Passo</a></li>
-      <li><a>Bug Report</a></li>
+      <li>
+        <RouterLink
+          to="/panel/step-generator"
+          :class="{ 'is-active': activePage === MenuComponentEnum.StepGenerator }"
+          >{{ MenuComponentEnum.StepGenerator }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/bug-report"
+          :class="{ 'is-active': activePage === MenuComponentEnum.BugReport }"
+          >{{ MenuComponentEnum.BugReport }}</RouterLink
+        >
+      </li>
     </ul>
     <p class="menu-label">Ferramentas avançadas</p>
     <ul class="menu-list">
