@@ -132,7 +132,13 @@ import MenuComponent from '../../components/MenuComponent.vue';
 import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { ref, onMounted, computed } from 'vue';
-import { handlerError, formatDate, showToast } from '../../utils/utils';
+import {
+  handlerError,
+  formatDate,
+  showToast,
+  addOverflowHidden,
+  removeOverflowHidden
+} from '../../utils/utils';
 import UserHistoricService from '../../service/userHistoricService';
 import type IUserHistoric from '../../interface/IUserHistoric';
 import type TestTypeEnum from '@/enum/testTypeEnum';
@@ -245,9 +251,11 @@ async function nextPage(): Promise<void> {
 }
 
 async function gotoPage(p: number): Promise<void> {
-  currentPage.value = p;
-  page.value = currentPage.value;
-  await getUserHistoric();
+  if (p != currentPage.value) {
+    currentPage.value = p;
+    page.value = currentPage.value;
+    await getUserHistoric();
+  }
 }
 
 const getNextButtonAttributes = computed(() => {
@@ -301,11 +309,13 @@ const historicId = ref(0);
 const loadingRemoveButton = ref(false);
 
 async function modalRemoveHistoric(id: string): Promise<void> {
+  addOverflowHidden();
   historicId.value = +id;
   removeModal.value = true;
 }
 
 function hideRemoveModal() {
+  removeOverflowHidden();
   removeModal.value = false;
 }
 

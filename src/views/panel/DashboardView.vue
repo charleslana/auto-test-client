@@ -187,7 +187,7 @@ import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { ref, onMounted } from 'vue';
 import { numberFormat } from '../../utils/utils';
 import UserService from '@/service/userService';
-import { handlerError, showToast } from '@/utils/utils';
+import { handlerError, showToast, addOverflowHidden, removeOverflowHidden } from '@/utils/utils';
 import type IUser from '@/interface/IUser';
 import ToastEnum from '@/enum/toastEnum';
 import type ITest from '@/interface/ITest';
@@ -220,14 +220,6 @@ async function getUserDetails(): Promise<void> {
     handlerError(error);
   }
 }
-
-const addOverflowHidden = () => {
-  document.documentElement.style.overflow = 'hidden';
-};
-
-const removeOverflowHidden = () => {
-  document.documentElement.style.overflow = '';
-};
 
 const beginner = ref(false);
 

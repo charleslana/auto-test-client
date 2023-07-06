@@ -53,3 +53,11 @@ export function formatDate(date: Date): string {
   const formattedDate: string = new Date(date).toLocaleString('pt-BR', options);
   return formattedDate.replace(',', ' às');
 }
+
+export const addOverflowHidden = () => {
+  document.documentElement.style.overflow = 'hidden';
+};
+
+export const removeOverflowHidden = () => {
+  document.documentElement.style.overflow = '';
+};
