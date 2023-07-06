@@ -2,7 +2,7 @@ import api from '@/config/api';
 import type ILogin from '@/interface/ILogin';
 import type IRegister from '@/interface/IRegister';
 
-export class UserService {
+export default class UserService {
   static async register(register: IRegister) {
     const response = await api.post('/user', register);
     return response.data;

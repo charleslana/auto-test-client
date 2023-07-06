@@ -65,11 +65,11 @@ import MenuComponent from '../../components/MenuComponent.vue';
 import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { onMounted, ref } from 'vue';
-import { UserItemService } from '@/service/userItemService';
+import UserItemService from '@/service/userItemService';
 import TestTypeEnum from '@/enum/testTypeEnum';
 import { handlerError } from '@/utils/utils';
 import BlockedPageComponent from '../../components/BlockedPageComponent.vue';
-import { OpenaiService } from '@/service/openaiService';
+import OpenaiService from '@/service/openaiService';
 
 onMounted(async () => {
   await validateItem();
@@ -100,6 +100,7 @@ const result = ref<string | null>(null);
 
 async function send(): Promise<void> {
   try {
+    validateInput(requirement.value);
     loading.value = true;
     result.value = null;
     const response = await OpenaiService.send({
@@ -128,6 +129,12 @@ const scrollDown = (): void => {
 const formatBreakLines = (text: string): string => {
   return text.replace(/\n/g, '<br>');
 };
+
+function validateInput(input: string): void {
+  if (input.trim() == '') {
+    throw new Error('Você deve preencher corretamente o campo de entrada');
+  }
+}
 </script>
 
 <style scoped></style>

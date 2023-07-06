@@ -36,10 +36,17 @@
                 </div>
               </div>
               <div class="level-right">
-                <button class="button">Exportar em Excel</button>
+                <button
+                  class="button"
+                  :class="{ 'is-loading': loadingXLSXButton }"
+                  :disabled="loadingXLSXButton"
+                  @click="exportXLSX"
+                >
+                  Exportar em Excel
+                </button>
               </div>
             </div>
-            <div v-if="showNoResults" class="no-results">Nenhum resultado encontrado</div>
+            <div v-if="showNoResults" class="no-results">Nenhum resultado foi encontrado.</div>
             <progress
               class="progress is-small is-info is-radiusless"
               max="100"
@@ -62,7 +69,9 @@
                         <button class="button is-info">Visualizar</button>
                       </div>
                       <div class="level-right">
-                        <button class="button is-danger">Excluir</button>
+                        <button class="button is-danger" @click="modalRemoveHistoric(item.id)">
+                          Excluir
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -96,6 +105,25 @@
       </div>
     </div>
   </div>
+  <div class="modal" :class="{ 'is-active': removeModal }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <section class="modal-card-body">
+        Deseja realmente remover este histórico? está ação não pode ser revertida.
+      </section>
+      <footer class="modal-card-foot">
+        <button
+          class="button is-danger"
+          :class="{ 'is-loading': loadingRemoveButton }"
+          :disabled="loadingRemoveButton"
+          @click="removeHistoric"
+        >
+          Remover
+        </button>
+        <button class="button" @click="hideRemoveModal">Cancelar</button>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -104,10 +132,12 @@ import MenuComponent from '../../components/MenuComponent.vue';
 import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { ref, onMounted, computed } from 'vue';
-import { formatDate } from '../../utils/utils';
+import { handlerError, formatDate, showToast } from '../../utils/utils';
 import UserHistoricService from '../../service/userHistoricService';
 import type IUserHistoric from '../../interface/IUserHistoric';
 import type TestTypeEnum from '@/enum/testTypeEnum';
+import ToastEnum from '@/enum/toastEnum';
+import { saveAs } from 'file-saver';
 
 const menuOptionsKeys = ref(Object.keys(MenuComponentEnum).slice(4));
 const menuOptions = ref(Object.values(MenuComponentEnum).slice(4));
@@ -198,7 +228,7 @@ const totalPages = ref(0);
 const currentPage = ref(1);
 const hasNextPage = ref(false);
 
-async function previousPage() {
+async function previousPage(): Promise<void> {
   if (currentPage.value > 1) {
     currentPage.value--;
     page.value = currentPage.value;
@@ -206,7 +236,7 @@ async function previousPage() {
   }
 }
 
-async function nextPage() {
+async function nextPage(): Promise<void> {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
     page.value = currentPage.value;
@@ -214,7 +244,7 @@ async function nextPage() {
   }
 }
 
-async function gotoPage(p: number) {
+async function gotoPage(p: number): Promise<void> {
   currentPage.value = p;
   page.value = currentPage.value;
   await getUserHistoric();
@@ -247,6 +277,56 @@ const displayedPages = computed(() => {
   const endPage = Math.min(currentPage.value + 3, totalPages.value);
   return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 });
+
+const loadingXLSXButton = ref(false);
+
+async function exportXLSX(): Promise<void> {
+  try {
+    loadingXLSXButton.value = true;
+    const response = await UserHistoricService.exportXLSX();
+    const blob = new Blob([response]);
+    saveAs(blob, 'Histórico.xlsx');
+    showToast('Exportação do histórico realizada com sucesso.', ToastEnum.Success);
+  } catch (error: any) {
+    showToast('Nenhum resultado foi encontrado.', ToastEnum.Danger);
+  } finally {
+    loadingXLSXButton.value = false;
+  }
+}
+
+const removeModal = ref(false);
+
+const historicId = ref(0);
+
+const loadingRemoveButton = ref(false);
+
+async function modalRemoveHistoric(id: string): Promise<void> {
+  historicId.value = +id;
+  removeModal.value = true;
+}
+
+function hideRemoveModal() {
+  removeModal.value = false;
+}
+
+async function removeHistoric(): Promise<void> {
+  try {
+    loadingRemoveButton.value = true;
+    const response = await UserHistoricService.delete(historicId.value);
+    showToast(response.message, ToastEnum.Success);
+    totalPages.value = 0;
+    totalCount.value = 0;
+    hasNextPage.value = false;
+    currentPage.value = 1;
+    page.value = currentPage.value;
+    await getUserHistoric();
+  } catch (error: any) {
+    handlerError(error);
+  } finally {
+    hideRemoveModal();
+    loadingRemoveButton.value = false;
+  }
+}
 </script>
 
 <style scoped>

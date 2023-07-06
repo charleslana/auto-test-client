@@ -186,7 +186,7 @@ import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { ref, onMounted } from 'vue';
 import { numberFormat } from '../../utils/utils';
-import { UserService } from '@/service/userService';
+import UserService from '@/service/userService';
 import { handlerError, showToast } from '@/utils/utils';
 import type IUser from '@/interface/IUser';
 import ToastEnum from '@/enum/toastEnum';

@@ -17,4 +17,19 @@ export default class UserHistoricService {
     const response = await api.get(url);
     return response.data;
   }
+
+  static async exportXLSX() {
+    const response = await api.get('/user/historic/export/xlsx', {
+      responseType: 'blob',
+      headers: {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }
+    });
+    return response.data;
+  }
+
+  static async delete(id: number) {
+    const response = await api.delete(`/user/historic/${id}`);
+    return response.data;
+  }
 }
