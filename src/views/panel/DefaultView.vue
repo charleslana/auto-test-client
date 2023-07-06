@@ -6,8 +6,8 @@
         <MenuComponent :activePage="MenuComponentEnum.Dashboard"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent pageName="Dashboard"></BreadCrumbComponent>
-        <h1>Dashboard</h1>
+        <BreadCrumbComponent :pageName="MenuComponentEnum.Dashboard"></BreadCrumbComponent>
+        <h1>{{ MenuComponentEnum.Dashboard }}</h1>
       </div>
     </div>
   </div>

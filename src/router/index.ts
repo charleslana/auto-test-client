@@ -1,4 +1,5 @@
 import DashboardView from '../views/panel/DashboardView.vue';
+import HistoricView from '../views/panel/HistoricView.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
@@ -42,6 +43,12 @@ const router = createRouter({
       name: 'panel-test-generator',
       component: TestGeneratorView,
       meta: { title: 'Auto test - Gerador de Testes' }
+    },
+    {
+      path: '/panel/historic',
+      name: 'panel-historic',
+      component: HistoricView,
+      meta: { title: 'Auto test - Histórico' }
     }
   ]
 });

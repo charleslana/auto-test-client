@@ -41,3 +41,15 @@ export function redirectToDashboardPage(): void {
     router.push(route);
   }
 }
+
+export function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
+  const formattedDate: string = new Date(date).toLocaleString('pt-BR', options);
+  return formattedDate.replace(',', ' às');
+}

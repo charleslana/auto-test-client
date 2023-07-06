@@ -11,21 +11,21 @@
       </li>
       <li>
         <RouterLink
-          to="/panel/dashboard"
+          to="/panel/profile"
           :class="{ 'is-active': activePage === MenuComponentEnum.Profile }"
           >{{ MenuComponentEnum.Profile }}</RouterLink
         >
       </li>
       <li>
         <RouterLink
-          to="/panel/dashboard"
+          to="/panel/items"
           :class="{ 'is-active': activePage === MenuComponentEnum.Items }"
           >{{ MenuComponentEnum.Items }}</RouterLink
         >
       </li>
       <li>
         <RouterLink
-          to="/panel/dashboard"
+          to="/panel/historic"
           :class="{ 'is-active': activePage === MenuComponentEnum.Historic }"
           >{{ MenuComponentEnum.Historic }}</RouterLink
         >
