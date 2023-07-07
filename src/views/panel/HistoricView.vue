@@ -6,7 +6,10 @@
         <MenuComponent :activePage="MenuComponentEnum.Historic"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent :pageName="MenuComponentEnum.Historic"></BreadCrumbComponent>
+        <BreadCrumbComponent
+          :links="[{ to: '/panel/dashboard', name: 'Geral' }]"
+          :pageName="MenuComponentEnum.Historic"
+        ></BreadCrumbComponent>
         <section class="hero">
           <div class="hero-body">
             <p class="title">{{ MenuComponentEnum.Historic }}</p>

@@ -6,7 +6,13 @@
         <MenuComponent :activePage="MenuComponentEnum.Historic"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent :pageName="MenuComponentEnum.Historic"></BreadCrumbComponent>
+        <BreadCrumbComponent
+          :links="[
+            { to: '/panel/dashboard', name: 'Geral' },
+            { to: '/panel/historic', name: 'Histórico' }
+          ]"
+          pageName="Detalhes do histórico"
+        ></BreadCrumbComponent>
         <section class="hero">
           <div class="hero-body">
             <p class="title">{{ MenuComponentEnum.Historic }}</p>
@@ -68,6 +74,7 @@ async function get(): Promise<void> {
     loading.value = false;
   } catch (error: any) {
     handlerError(error);
+    router.push({ name: 'panel-historic' });
   }
 }
 </script>

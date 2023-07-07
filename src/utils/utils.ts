@@ -37,9 +37,7 @@ export function handlerError(error: any): void {
 export function redirectToDashboardPage(): void {
   const getToken = getTokenFromLocalStorage();
   if (getToken != null) {
-    type RouteLocationRaw = import('vue-router').RouteLocationRaw;
-    const route: RouteLocationRaw = { name: 'panel-dashboard' };
-    router.push(route);
+    router.push({ name: 'panel-dashboard' });
   }
 }
 

@@ -6,7 +6,10 @@
         <MenuComponent :activePage="MenuComponentEnum.Dashboard"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent :pageName="MenuComponentEnum.Dashboard"></BreadCrumbComponent>
+        <BreadCrumbComponent
+          :links="[{ to: '/panel/dashboard', name: 'Geral' }]"
+          :pageName="MenuComponentEnum.Dashboard"
+        ></BreadCrumbComponent>
         <section class="hero is-info welcome is-small">
           <div class="hero-body">
             <div class="container">

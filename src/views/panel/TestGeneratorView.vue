@@ -6,7 +6,10 @@
         <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
       </div>
       <div class="column is-9">
-        <BreadCrumbComponent pageName="Gerador de Testes"></BreadCrumbComponent>
+        <BreadCrumbComponent
+          :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
+          pageName="Gerador de Testes"
+        ></BreadCrumbComponent>
         <progress
           class="progress is-small is-info is-radiusless"
           max="100"
