@@ -66,12 +66,12 @@
                     <div class="level mt-2">
                       <div class="level-left">
                         <RouterLink :to="'/panel/historic/' + item.id" class="button is-info"
-                          >Visualizar</RouterLink
-                        >
+                          ><font-awesome-icon :icon="['fas', 'magnifying-glass']"
+                        /></RouterLink>
                       </div>
                       <div class="level-right">
                         <button class="button is-danger" @click="modalRemoveHistoric(item.id)">
-                          Excluir
+                          <font-awesome-icon :icon="['fas', 'trash']" />
                         </button>
                       </div>
                     </div>

@@ -11,7 +11,7 @@
       </li>
       <li>
         <RouterLink
-          to="/panel/profile"
+          to="/panel/user/details"
           :class="{ 'is-active': activePage === MenuComponentEnum.Profile }"
           >{{ MenuComponentEnum.Profile }}</RouterLink
         >

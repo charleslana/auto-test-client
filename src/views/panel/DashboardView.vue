@@ -24,28 +24,36 @@
           <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.testGenerator) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.testGenerator) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.TestGenerator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.stepGenerator) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.stepGenerator) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.StepGenerator }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.bugReport) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.bugReport) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.BugReport }}</p>
               </article>
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.testPlan) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.testPlan) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.TestPlan }}</p>
               </article>
@@ -57,7 +65,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.qualityIndicator) }}
+                  {{ formatCompactNumber(response.qualityIndicator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.QualityIndicator }}</p>
@@ -66,7 +74,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.testTranslator) }}
+                  {{ formatCompactNumber(response.testTranslator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.TestTranslator }}</p>
@@ -75,7 +83,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.usabilityTestCase) }}
+                  {{ formatCompactNumber(response.usabilityTestCase) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.UsabilityTestCase }}</p>
@@ -84,7 +92,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.testMassGenerator) }}
+                  {{ formatCompactNumber(response.testMassGenerator) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.TestMassGenerator }}</p>
@@ -97,7 +105,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.gherkinLanguage) }}
+                  {{ formatCompactNumber(response.gherkinLanguage) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.GherkinLanguage }}</p>
@@ -105,7 +113,9 @@
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.securityTest) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.securityTest) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.SecurityTest }}</p>
               </article>
@@ -113,7 +123,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.performanceTest) }}
+                  {{ formatCompactNumber(response.performanceTest) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.PerformanceTest }}</p>
@@ -121,7 +131,9 @@
             </div>
             <div class="tile is-parent">
               <article class="tile is-child box">
-                <p class="title" v-if="!loadingCount">{{ numberFormat(response.apiTest) }}</p>
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.apiTest) }}
+                </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.APITest }}</p>
               </article>
@@ -133,7 +145,7 @@
             <div class="tile is-parent">
               <article class="tile is-child box">
                 <p class="title" v-if="!loadingCount">
-                  {{ numberFormat(response.sqlQueryBuilder) }}
+                  {{ formatCompactNumber(response.sqlQueryBuilder) }}
                 </p>
                 <p class="title" v-if="loadingCount"><Skeletor /></p>
                 <p class="subtitle">{{ MenuComponentEnum.SQLQueryBuilder }}</p>
@@ -188,7 +200,7 @@ import MenuComponent from '../../components/MenuComponent.vue';
 import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { ref, onMounted } from 'vue';
-import { numberFormat } from '../../utils/utils';
+import { formatCompactNumber } from '../../utils/utils';
 import UserService from '@/service/userService';
 import { handlerError, showToast, addOverflowHidden, removeOverflowHidden } from '@/utils/utils';
 import type IUser from '@/interface/IUser';

@@ -4,7 +4,7 @@ import ToastEnum from '@/enum/toastEnum';
 import { getTokenFromLocalStorage } from './localStorageUtils';
 import { toast } from 'bulma-toast';
 
-export function numberFormat(number: number): string {
+export function formatCompactNumber(number: number): string {
   const formatter = new Intl.NumberFormat('en-US', { notation: 'compact' });
   return formatter.format(number);
 }
@@ -78,3 +78,17 @@ export function getMenuComponentTitle(type: string): string {
   }
   throw new Error(`Invalid MenuComponentEnum value: ${type}`);
 }
+
+export const formatTextDate = (dateString: string): string => {
+  const date = new Date(Date.parse(dateString));
+  const year = new Intl.DateTimeFormat('pt-BR', { year: 'numeric' }).format(date);
+  const month = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(date);
+  const day = new Intl.DateTimeFormat('pt-BR', { day: '2-digit' }).format(date);
+  const hour = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit' }).format(date);
+  const minute = new Intl.DateTimeFormat('pt-BR', { minute: '2-digit' }).format(date);
+  return `${day} de ${month} de ${year} às ${hour}:${minute}`;
+};
+
+export const formatNumber = (number: number): string => {
+  return number.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+};

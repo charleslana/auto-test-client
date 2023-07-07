@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import TestGeneratorView from '../views/panel/TestGeneratorView.vue';
+import UserDetailsView from '../views/panel/UserDetailsView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -56,6 +57,12 @@ const router = createRouter({
       name: 'panel-historic-details',
       component: HistoricDetailsView,
       meta: { title: 'Auto test - Histórico detalhes' }
+    },
+    {
+      path: '/panel/user/details',
+      name: 'panel-user-details',
+      component: UserDetailsView,
+      meta: { title: 'Auto test - Detalhes do usuário' }
     }
   ]
 });
