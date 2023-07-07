@@ -26,6 +26,12 @@ export function handlerError(error: any): void {
     return showToast('Falha ao conectar com o servidor.', ToastEnum.Danger);
   }
   if (error.response && error.response.data.validation) {
+    if (error.response && error.response.data.validation.params) {
+      return showToast(error.response.data.validation.params.message, ToastEnum.Danger);
+    }
+    if (error.response && error.response.data.validation.query) {
+      return showToast(error.response.data.validation.query.message, ToastEnum.Danger);
+    }
     return showToast(error.response.data.validation.body.message, ToastEnum.Danger);
   }
   if (error.response && error.response.data.message) {
