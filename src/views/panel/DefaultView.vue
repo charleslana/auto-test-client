@@ -7,7 +7,12 @@
       </div>
       <div class="column is-9">
         <BreadCrumbComponent :pageName="MenuComponentEnum.Dashboard"></BreadCrumbComponent>
-        <h1>{{ MenuComponentEnum.Dashboard }}</h1>
+        <section class="hero">
+          <div class="hero-body">
+            <p class="title">{{ MenuComponentEnum.Dashboard }}</p>
+            <p class="subtitle">Hero subtitle</p>
+          </div>
+        </section>
       </div>
     </div>
   </div>

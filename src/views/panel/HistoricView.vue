@@ -66,7 +66,9 @@
                     <time>{{ formatDate(item.createdAt) }}</time>
                     <div class="level mt-2">
                       <div class="level-left">
-                        <button class="button is-info">Visualizar</button>
+                        <RouterLink :to="'/panel/historic/' + item.id" class="button is-info"
+                          >Visualizar</RouterLink
+                        >
                       </div>
                       <div class="level-right">
                         <button class="button is-danger" @click="modalRemoveHistoric(item.id)">
@@ -137,13 +139,15 @@ import {
   formatDate,
   showToast,
   addOverflowHidden,
-  removeOverflowHidden
+  removeOverflowHidden,
+  getMenuComponentTitle
 } from '../../utils/utils';
 import UserHistoricService from '../../service/userHistoricService';
 import type IUserHistoric from '../../interface/IUserHistoric';
 import type TestTypeEnum from '@/enum/testTypeEnum';
 import ToastEnum from '@/enum/toastEnum';
 import { saveAs } from 'file-saver';
+import { RouterLink } from 'vue-router';
 
 const menuOptionsKeys = ref(Object.keys(MenuComponentEnum).slice(4));
 const menuOptions = ref(Object.values(MenuComponentEnum).slice(4));
@@ -213,20 +217,6 @@ async function getUserHistoric(): Promise<void> {
   } finally {
     loading.value = false;
   }
-}
-
-function getMenuComponentTitle(type: string): string {
-  let key = '';
-  if (type === 'sqlQueryBuilder' || type === 'apiTest') {
-    key = type.charAt(0).toUpperCase() + type.slice(1, 3).toUpperCase() + type.slice(3);
-  } else {
-    key = type.charAt(0).toUpperCase() + type.slice(1);
-  }
-  const enumValue = MenuComponentEnum[key as keyof typeof MenuComponentEnum];
-  if (enumValue) {
-    return enumValue;
-  }
-  throw new Error(`Invalid MenuComponentEnum value: ${type}`);
 }
 
 const totalCount = ref(0);

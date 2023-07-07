@@ -1,4 +1,5 @@
 import DashboardView from '../views/panel/DashboardView.vue';
+import HistoricDetailsView from '../views/panel/HistoricDetailsView.vue';
 import HistoricView from '../views/panel/HistoricView.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
@@ -49,6 +50,12 @@ const router = createRouter({
       name: 'panel-historic',
       component: HistoricView,
       meta: { title: 'Auto test - Histórico' }
+    },
+    {
+      path: '/panel/historic/:id',
+      name: 'panel-historic-details',
+      component: HistoricDetailsView,
+      meta: { title: 'Auto test - Histórico detalhes' }
     }
   ]
 });

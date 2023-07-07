@@ -32,4 +32,9 @@ export default class UserHistoricService {
     const response = await api.delete(`/user/historic/${id}`);
     return response.data;
   }
+
+  static async get(id: number) {
+    const response = await api.get(`/user/historic/${id}`);
+    return response.data;
+  }
 }

@@ -67,7 +67,7 @@ import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/userItemService';
 import TestTypeEnum from '@/enum/testTypeEnum';
-import { handlerError } from '@/utils/utils';
+import { handlerError, formatBreakLines } from '@/utils/utils';
 import BlockedPageComponent from '../../components/BlockedPageComponent.vue';
 import OpenaiService from '@/service/openaiService';
 
@@ -124,10 +124,6 @@ const scrollDown = (): void => {
       behavior: 'smooth'
     });
   }, 100);
-};
-
-const formatBreakLines = (text: string): string => {
-  return text.replace(/\n/g, '<br>');
 };
 
 function validateInput(input: string): void {

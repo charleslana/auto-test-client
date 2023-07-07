@@ -1,3 +1,4 @@
+import MenuComponentEnum from '@/enum/menuComponentEnum';
 import router from '@/router';
 import ToastEnum from '@/enum/toastEnum';
 import { getTokenFromLocalStorage } from './localStorageUtils';
@@ -61,3 +62,21 @@ export const addOverflowHidden = () => {
 export const removeOverflowHidden = () => {
   document.documentElement.style.overflow = '';
 };
+
+export const formatBreakLines = (text: string): string => {
+  return text.replace(/\n/g, '<br>');
+};
+
+export function getMenuComponentTitle(type: string): string {
+  let key = '';
+  if (type === 'sqlQueryBuilder' || type === 'apiTest') {
+    key = type.charAt(0).toUpperCase() + type.slice(1, 3).toUpperCase() + type.slice(3);
+  } else {
+    key = type.charAt(0).toUpperCase() + type.slice(1);
+  }
+  const enumValue = MenuComponentEnum[key as keyof typeof MenuComponentEnum];
+  if (enumValue) {
+    return enumValue;
+  }
+  throw new Error(`Invalid MenuComponentEnum value: ${type}`);
+}
