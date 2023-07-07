@@ -22,6 +22,12 @@
               <p class="subtitle" v-html="formatBreakLines(historic!.input)"></p>
               <p class="subtitle has-text-weight-bold">Saída de dados:</p>
               <p class="subtitle" v-html="formatBreakLines(historic!.output)"></p>
+              <time class="subtitle has-text-weight-bold"
+                >Data:
+                <span class="has-text-weight-normal">{{
+                  formatDate(historic!.createdAt)
+                }}</span></time
+              >
             </div>
           </div>
         </section>
@@ -37,7 +43,7 @@ import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import { useRouter } from 'vue-router';
 import UserHistoricService from '@/service/userHistoricService';
-import { handlerError, formatBreakLines, getMenuComponentTitle } from '@/utils/utils';
+import { handlerError, formatBreakLines, getMenuComponentTitle, formatDate } from '@/utils/utils';
 import { onMounted, ref } from 'vue';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import type IUserHistoric from '@/interface/IUserHistoric';
