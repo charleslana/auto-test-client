@@ -56,6 +56,18 @@
                 <div class="level-right is-size-4">{{ user!.maximumExperience }}</div>
               </div>
               <p class="title">Conquistas</p>
+              <div v-if="showNoResults" class="no-results">Nenhuma conquista por enquanto.</div>
+              <div class="list" v-if="!showNoResults">
+                <div class="list-item" v-for="item in userConquest" :key="item.id">
+                  <div class="list-item-image">
+                    <font-awesome-icon :icon="['fas', 'gift']" size="4x" class="has-text-primary" />
+                  </div>
+                  <div class="list-item-content">
+                    <div class="list-item-title">{{ item.conquest.name }}</div>
+                    <div class="list-item-description">{{ item.conquest.description }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -74,11 +86,14 @@ import { onMounted, ref } from 'vue';
 import { formatTextDate, handlerError, formatNumber, formatCompactNumber } from '@/utils/utils';
 import UserService from '@/service/userService';
 import type IUser from '@/interface/IUser';
+import UserConquestService from '@/service/userConquestService';
+import type IUserConquest from '@/interface/IUserConquest';
 
 const loading = ref(true);
 
 onMounted(async () => {
   await getUserDetails();
+  await getUserConquest();
 });
 
 const user = ref<IUser>();
@@ -96,6 +111,25 @@ async function getUserDetails(): Promise<void> {
 function calculateExperiencePercentage(minExperience: number, maxExperience: number): number {
   const percentage = (minExperience / maxExperience) * 100;
   return Math.min(percentage, 100);
+}
+
+const userConquest = ref<IUserConquest[]>([]);
+
+const showNoResults = ref(false);
+
+async function getUserConquest(): Promise<void> {
+  try {
+    loading.value = true;
+    const response = (await UserConquestService.getAll()) as IUserConquest[];
+    if (!response.length) {
+      showNoResults.value = true;
+    } else {
+      userConquest.value = response;
+    }
+    loading.value = false;
+  } catch (error: any) {
+    handlerError(error);
+  }
 }
 </script>
 
