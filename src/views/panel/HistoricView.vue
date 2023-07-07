@@ -47,11 +47,7 @@
               </div>
             </div>
             <div v-if="showNoResults" class="no-results">Nenhum resultado foi encontrado.</div>
-            <progress
-              class="progress is-small is-info is-radiusless"
-              max="100"
-              v-if="loading"
-            ></progress>
+            <LoadingComponent :loading="loading" />
             <div v-if="!loading">
               <div class="card mb-2" v-for="item in result" :key="item.id">
                 <div class="card-content">
@@ -148,6 +144,7 @@ import type TestTypeEnum from '@/enum/testTypeEnum';
 import ToastEnum from '@/enum/toastEnum';
 import { saveAs } from 'file-saver';
 import { RouterLink } from 'vue-router';
+import LoadingComponent from '@/components/LoadingComponent.vue';
 
 const menuOptionsKeys = ref(Object.keys(MenuComponentEnum).slice(4));
 const menuOptions = ref(Object.values(MenuComponentEnum).slice(4));
