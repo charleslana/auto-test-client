@@ -1,3 +1,4 @@
+import ConquestView from '../views/panel/ConquestView.vue';
 import DashboardView from '../views/panel/DashboardView.vue';
 import HistoricDetailsView from '../views/panel/HistoricDetailsView.vue';
 import HistoricView from '../views/panel/HistoricView.vue';
@@ -63,6 +64,12 @@ const router = createRouter({
       name: 'panel-user-details',
       component: UserDetailsView,
       meta: { title: 'Auto test - Detalhes do usuário' }
+    },
+    {
+      path: '/panel/conquest',
+      name: 'panel-conquest',
+      component: ConquestView,
+      meta: { title: 'Auto test - Conquistas' }
     }
   ]
 });

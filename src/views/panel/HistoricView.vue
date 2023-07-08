@@ -149,8 +149,8 @@ import { saveAs } from 'file-saver';
 import { RouterLink } from 'vue-router';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 
-const menuOptionsKeys = ref(Object.keys(MenuComponentEnum).slice(4));
-const menuOptions = ref(Object.values(MenuComponentEnum).slice(4));
+const menuOptionsKeys = ref(Object.keys(MenuComponentEnum).slice(5));
+const menuOptions = ref(Object.values(MenuComponentEnum).slice(5));
 
 const selectedTestType = ref<string | undefined>('');
 

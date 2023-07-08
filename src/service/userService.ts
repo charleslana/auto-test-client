@@ -29,4 +29,9 @@ export default class UserService {
     const response = await api.get('/user/test/count');
     return response.data;
   }
+
+  static async getUserExperience() {
+    const response = await api.get('/user/test/experience');
+    return response.data;
+  }
 }

@@ -60,7 +60,11 @@
               <div class="list" v-if="!showNoResults">
                 <div class="list-item" v-for="item in userConquest" :key="item.id">
                   <div class="list-item-image">
-                    <font-awesome-icon :icon="['fas', 'gift']" size="4x" class="has-text-primary" />
+                    <font-awesome-icon
+                      :icon="['fas', 'medal']"
+                      size="4x"
+                      class="has-text-primary"
+                    />
                   </div>
                   <div class="list-item-content">
                     <div class="list-item-title">{{ item.conquest.name }}</div>
@@ -83,7 +87,13 @@ import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
 import MenuComponentEnum from '../../enum/menuComponentEnum';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import { onMounted, ref } from 'vue';
-import { formatTextDate, handlerError, formatNumber, formatCompactNumber } from '@/utils/utils';
+import {
+  formatTextDate,
+  handlerError,
+  formatNumber,
+  formatCompactNumber,
+  calculateExperiencePercentage
+} from '@/utils/utils';
 import UserService from '@/service/userService';
 import type IUser from '@/interface/IUser';
 import UserConquestService from '@/service/userConquestService';
@@ -106,11 +116,6 @@ async function getUserDetails(): Promise<void> {
   } catch (error: any) {
     handlerError(error);
   }
-}
-
-function calculateExperiencePercentage(minExperience: number, maxExperience: number): number {
-  const percentage = (minExperience / maxExperience) * 100;
-  return Math.min(percentage, 100);
 }
 
 const userConquest = ref<IUserConquest[]>([]);

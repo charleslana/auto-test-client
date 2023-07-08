@@ -2,9 +2,10 @@ import App from './App.vue';
 import router from './router';
 import { createApp } from 'vue';
 import {
+  faCircleCheck,
   faCircleInfo,
-  faGift,
   faMagnifyingGlass,
+  faMedal,
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -18,7 +19,7 @@ import './assets/extension/bulma-list.css';
 import 'animate.css';
 import 'vue-skeletor/dist/vue-skeletor.css';
 
-library.add(faCircleInfo, faTrash, faMagnifyingGlass, faGift);
+library.add(faCircleInfo, faTrash, faMagnifyingGlass, faMedal, faCircleCheck);
 
 const app = createApp(App);
 

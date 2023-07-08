@@ -1,4 +1,5 @@
 enum MenuComponentEnum {
+  Any = 'Any',
   Dashboard = 'Dashboard',
   Profile = 'Perfil',
   Items = 'Itens',

@@ -4,6 +4,6 @@ export default interface IConquest {
   id: number;
   name: string;
   description: string;
-  experience: string;
+  experience: number;
   type: TestTypeEnum;
 }

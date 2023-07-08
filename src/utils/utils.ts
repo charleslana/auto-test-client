@@ -98,3 +98,11 @@ export const formatTextDate = (dateString: string): string => {
 export const formatNumber = (number: number): string => {
   return number.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 };
+
+export function calculateExperiencePercentage(
+  minExperience: number,
+  maxExperience: number
+): number {
+  const percentage = (minExperience / maxExperience) * 100;
+  return Math.min(percentage, 100);
+}
