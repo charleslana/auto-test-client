@@ -1,9 +1,9 @@
 import type TestTypeEnum from '@/enum/testTypeEnum';
 
-export default interface IConquest {
+export default interface IItem {
   id: string;
   name: string;
   description: string;
-  experience: number;
+  expiryDay: number;
   type: TestTypeEnum;
 }

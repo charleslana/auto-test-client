@@ -5,6 +5,7 @@ import HistoricView from '../views/panel/HistoricView.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import ShopView from '../views/panel/ShopView.vue';
 import TestGeneratorView from '../views/panel/TestGeneratorView.vue';
 import UserDetailsView from '../views/panel/UserDetailsView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -70,6 +71,12 @@ const router = createRouter({
       name: 'panel-conquest',
       component: ConquestView,
       meta: { title: 'Auto test - Conquistas' }
+    },
+    {
+      path: '/panel/shop',
+      name: 'panel-shop',
+      component: ShopView,
+      meta: { title: 'Auto test - Loja' }
     }
   ]
 });

@@ -3,7 +3,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.Any"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.NavBar"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
