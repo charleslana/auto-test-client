@@ -21,6 +21,11 @@
               <div class="is-size-5 mb-5">
                 Você possui
                 <span class="has-text-weight-bold">{{ formatNumber(score) }}</span> pontos
+                <span
+                  class="has-tooltip-multiline"
+                  data-tooltip="Para adquirir pontos, você deve usar as outras ferramentas liberadas, elas te ajudarão no seu progresso."
+                  ><font-awesome-icon :icon="['fas', 'circle-info']" class="has-text-info"
+                /></span>
               </div>
               <div v-if="shop.length === 0" class="no-results">Nenhuma conquista por enquanto.</div>
               <div v-else class="card mb-5" v-for="item in shop" :key="item.id">
@@ -35,13 +40,22 @@
                   <small class="has-text-success" v-else>Item permanente</small>
                 </div>
                 <footer class="card-footer">
-                  <div class="button card-footer-item" v-if="score < item.score">
+                  <div
+                    v-if="isItemPurchased(item.itemId)"
+                    class="button card-footer-item has-text-success"
+                  >
+                    Item já comprado
+                  </div>
+                  <div
+                    v-else-if="score < item.score"
+                    class="button card-footer-item has-text-danger"
+                  >
                     Insuficiente, preço: {{ formatNumber(item.score) }} pontos
                   </div>
                   <button
-                    class="button card-footer-item has-text-success"
-                    @click="shopModal(item.id)"
                     v-else
+                    class="button card-footer-item has-text-info"
+                    @click="shopModal(item.id)"
                   >
                     Comprar com {{ formatNumber(item.score) }} Pontos
                   </button>
@@ -93,13 +107,20 @@ import type IShop from '@/interface/IShop';
 import UserService from '@/service/userService';
 import type IUser from '@/interface/IUser';
 import ToastEnum from '@/enum/toastEnum';
+import type IUserItem from '@/interface/IUserItem';
+import UserItemService from '@/service/userItemService';
 
 const loading = ref(true);
 
 onMounted(async () => {
+  await init();
+});
+
+async function init(): Promise<void> {
   await getShop();
   await getUserDetails();
-});
+  await getUserItem();
+}
 
 const shop = ref<IShop[]>([]);
 
@@ -149,13 +170,30 @@ async function buy(): Promise<void> {
     loadingButton.value = true;
     const response = await ShopService.buy(id.value);
     showToast(response.message, ToastEnum.Success);
-    await getUserDetails();
+    await init();
   } catch (error: any) {
     handlerError(error);
   } finally {
     hideShopModal();
     loadingButton.value = false;
   }
+}
+
+const userItems = ref<IUserItem[]>([]);
+
+async function getUserItem(): Promise<void> {
+  try {
+    loading.value = true;
+    const response = (await UserItemService.getAll()) as IUserItem[];
+    userItems.value = response;
+    loading.value = false;
+  } catch (error: any) {
+    handlerError(error);
+  }
+}
+
+function isItemPurchased(itemId: string): boolean {
+  return userItems.value.some((userItem) => userItem.itemId === itemId);
 }
 </script>
 

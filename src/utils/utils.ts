@@ -106,3 +106,18 @@ export function calculateExperiencePercentage(
   const percentage = (minExperience / maxExperience) * 100;
   return Math.min(percentage, 100);
 }
+
+export const getRemainingTime = (targetDate: Date) => {
+  const currentDate = new Date();
+  const timeDifference = targetDate.getTime() - currentDate.getTime();
+  if (timeDifference > 86400000) {
+    const daysRemaining = Math.floor(timeDifference / 86400000);
+    return `Faltam ${daysRemaining} dias restantes`;
+  }
+  if (timeDifference > 3600000) {
+    const hoursRemaining = Math.floor(timeDifference / 3600000);
+    return `Faltam ${hoursRemaining} horas restantes`;
+  }
+  const minutesRemaining = Math.floor(timeDifference / 60000);
+  return `Faltam ${minutesRemaining} minutos restantes`;
+};

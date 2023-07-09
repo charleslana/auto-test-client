@@ -3,6 +3,7 @@ import DashboardView from '../views/panel/DashboardView.vue';
 import HistoricDetailsView from '../views/panel/HistoricDetailsView.vue';
 import HistoricView from '../views/panel/HistoricView.vue';
 import HomeView from '../views/HomeView.vue';
+import ItemsView from '../views/panel/ItemsView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import ShopView from '../views/panel/ShopView.vue';
@@ -77,6 +78,12 @@ const router = createRouter({
       name: 'panel-shop',
       component: ShopView,
       meta: { title: 'Auto test - Loja' }
+    },
+    {
+      path: '/panel/items',
+      name: 'panel-items',
+      component: ItemsView,
+      meta: { title: 'Auto test - Meus itens' }
     }
   ]
 });

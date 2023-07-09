@@ -6,4 +6,9 @@ export default class UserItemService {
     const response = await api.get(`/user/item/validate/type?filterType=${type}`);
     return response.data;
   }
+
+  static async getAll() {
+    const response = await api.get('/user/item');
+    return response.data;
+  }
 }
