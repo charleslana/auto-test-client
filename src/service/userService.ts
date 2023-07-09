@@ -1,6 +1,7 @@
 import api from '@/config/api';
 import type ILogin from '@/interface/ILogin';
 import type IRegister from '@/interface/IRegister';
+import type IUserPaginated from '@/interface/IUserPaginated';
 
 export default class UserService {
   static async register(register: IRegister) {
@@ -32,6 +33,22 @@ export default class UserService {
 
   static async getUserExperience() {
     const response = await api.get('/user/test/experience');
+    return response.data;
+  }
+
+  static async getPaginated(userPaginated: IUserPaginated) {
+    let url = '/user';
+    if (userPaginated.page != undefined) {
+      url = `${url}?page=${userPaginated.page}`;
+      if (userPaginated.filterType != undefined) {
+        url = `${url}&filterType=${userPaginated.filterType}`;
+      }
+    } else {
+      if (userPaginated.filterType != undefined) {
+        url = `${url}?filterType=${userPaginated.filterType}`;
+      }
+    }
+    const response = await api.get(url);
     return response.data;
   }
 }

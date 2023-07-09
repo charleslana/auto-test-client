@@ -5,6 +5,7 @@ import HistoricView from '../views/panel/HistoricView.vue';
 import HomeView from '../views/HomeView.vue';
 import ItemsView from '../views/panel/ItemsView.vue';
 import LoginView from '../views/LoginView.vue';
+import RankView from '../views/panel/RankView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import ShopView from '../views/panel/ShopView.vue';
 import TestGeneratorView from '../views/panel/TestGeneratorView.vue';
@@ -84,6 +85,12 @@ const router = createRouter({
       name: 'panel-items',
       component: ItemsView,
       meta: { title: 'Auto test - Meus itens' }
+    },
+    {
+      path: '/panel/rank',
+      name: 'panel-rank',
+      component: RankView,
+      meta: { title: 'Auto test - Classificação' }
     }
   ]
 });
