@@ -145,3 +145,18 @@ export const calculateElapsedTime = (startDate: Date): string => {
   const daysElapsed = Math.floor(timeDifference / 86400000);
   return `${daysElapsed} ${daysElapsed === 1 ? 'dia' : 'dias'} atrás`;
 };
+
+export const scrollDown = (): void => {
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  }, 100);
+};
+
+export function validateInput(input: string): void {
+  if (input.trim() == '') {
+    throw new Error('Você deve preencher corretamente o campo de entrada');
+  }
+}

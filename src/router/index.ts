@@ -1,3 +1,4 @@
+import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
 import DashboardView from '@/views/panel/DashboardView.vue';
 import HistoricDetailsView from '@/views/panel/HistoricDetailsView.vue';
@@ -5,10 +6,13 @@ import HistoricView from '@/views/panel/HistoricView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ItemsView from '@/views/panel/ItemsView.vue';
 import LoginView from '@/views/LoginView.vue';
+import QualityIndicatorView from '@/views/panel/QualityIndicatorView.vue';
 import RankView from '@/views/panel/RankView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import ShopView from '@/views/panel/ShopView.vue';
+import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
+import TestPlanView from '@/views/panel/TestPlanView.vue';
 import UserDetailsView from '@/views/panel/UserDetailsView.vue';
 import UserProfileView from '@/views/panel/UserProfileView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -50,6 +54,30 @@ const router = createRouter({
       name: 'panel-test-generator',
       component: TestGeneratorView,
       meta: { title: 'Auto test - Gerador de Testes' }
+    },
+    {
+      path: '/panel/step-generator',
+      name: 'panel-step-generator',
+      component: StepGeneratorView,
+      meta: { title: 'Auto test - Gerador de Passo a Passo' }
+    },
+    {
+      path: '/panel/bug-report',
+      name: 'panel-bug-report',
+      component: BugReportView,
+      meta: { title: 'Auto test - Relatório de Defeitos' }
+    },
+    {
+      path: '/panel/test-plan',
+      name: 'panel-test-plan',
+      component: TestPlanView,
+      meta: { title: 'Auto test - Plano de Testes' }
+    },
+    {
+      path: '/panel/quality-indicator',
+      name: 'panel-quality-indicator',
+      component: QualityIndicatorView,
+      meta: { title: 'Auto test - Indicadores de Qualidade' }
     },
     {
       path: '/panel/historic',

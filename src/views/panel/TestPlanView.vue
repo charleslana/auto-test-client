@@ -3,24 +3,23 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.TestPlan"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
-          :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
-          :pageName="MenuComponentEnum.TestGenerator"
+          :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
+          :pageName="MenuComponentEnum.TestPlan"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestGenerator" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.TestPlan" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestGenerator }}</p>
+              <p class="title">{{ MenuComponentEnum.TestPlan }}</p>
               <p class="subtitle">
-                Olá! Bem-vindo(a) à nossa ferramenta de geração de casos de teste para validação de
-                software. Por favor, forneça-nos um trecho da documentação do software ou um
-                requisito específico que deseja validar. Com base nessa entrada, nosso sistema
-                gerará casos de teste funcionais para você
+                Nossa ferramenta de geração de plano de teste vai te ajudar a gerar um plano de
+                testes completo para seu projeto de qualidade. Por favor, forneça-nos um trecho da
+                documentação do software ou um ou mais requisitos que deseja validar.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
@@ -81,7 +80,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.TestPlan)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -89,10 +88,10 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
+  'cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar\n\no cartão de credito deve ser cancelado 30 dias após o cliente ficar inadimplente'
 );
 
-const context = ref('Ex.: Sistema de cartão de credito de um banco');
+const context = ref('Ex.: Sistema de cartão de credito de um banco\n\n');
 
 const loading = ref(false);
 
@@ -106,7 +105,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestGenerator
+      type: TestTypeEnum.TestPlan
     });
     result.value = response.message;
     scrollDown();

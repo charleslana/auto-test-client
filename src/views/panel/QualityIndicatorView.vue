@@ -3,31 +3,29 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.QualityIndicator"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
-          :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
-          :pageName="MenuComponentEnum.TestGenerator"
+          :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
+          :pageName="MenuComponentEnum.QualityIndicator"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestGenerator" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.QualityIndicator" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestGenerator }}</p>
+              <p class="title">{{ MenuComponentEnum.QualityIndicator }}</p>
               <p class="subtitle">
-                Olá! Bem-vindo(a) à nossa ferramenta de geração de casos de teste para validação de
-                software. Por favor, forneça-nos um trecho da documentação do software ou um
-                requisito específico que deseja validar. Com base nessa entrada, nosso sistema
-                gerará casos de teste funcionais para você
+                Olá! Bem-vindo à nossa ferramenta de geração de indicadores de qualidade para
+                avaliação de projetos de software. Com base na documentação fornecida ou em
+                requisitos específicos, nossa ferramenta é capaz de calcular uma variedade de
+                indicadores que podem ajudar a monitorar a qualidade do seu projeto.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <div class="control">
-                    <p>
-                      <span class="has-text-danger">*</span> Requisito ou trecho da documentação
-                    </p>
+                    <p><span class="has-text-danger">*</span> Status do projeto</p>
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
@@ -81,7 +79,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.QualityIndicator)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -89,10 +87,12 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
+  '[TOTAL DE CASOS DE TESTE]: 620\n[CASOS DE TESTE EXECUTADOS]: 231\n[CASOS DE TESTE COM FALHA]: 113\n[TOTAL DE DEFEITOS ENCONTRADOS]: 120\n[DEFEITOS CORRIGIDOS]: 65\n[DEFEITOS REABERTOS]: 30\n[DEFEITOS EM ABERTO]: 82\n[DEFEITOS REJEITADOS]: 3'
 );
 
-const context = ref('Ex.: Sistema de cartão de credito de um banco');
+const context = ref(
+  'A taxa de sucesso do meu projeto é medida pelos testes passed sobre os testes executados\nA densidade de defeitos de meu projeto é calculada pelo numero de defeitos encontrados dividido pela quantidade de testes executados\n\n'
+);
 
 const loading = ref(false);
 
@@ -106,7 +106,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestGenerator
+      type: TestTypeEnum.QualityIndicator
     });
     result.value = response.message;
     scrollDown();

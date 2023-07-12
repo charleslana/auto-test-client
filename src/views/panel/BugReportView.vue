@@ -3,31 +3,29 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.BugReport"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
-          :pageName="MenuComponentEnum.TestGenerator"
+          :pageName="MenuComponentEnum.BugReport"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestGenerator" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.BugReport" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestGenerator }}</p>
+              <p class="title">{{ MenuComponentEnum.BugReport }}</p>
               <p class="subtitle">
-                Olá! Bem-vindo(a) à nossa ferramenta de geração de casos de teste para validação de
-                software. Por favor, forneça-nos um trecho da documentação do software ou um
-                requisito específico que deseja validar. Com base nessa entrada, nosso sistema
-                gerará casos de teste funcionais para você
+                Você está prestes a usar a ferramenta Relatório de defeitos para reportar um defeito
+                encontrado no software. Por favor, preencha as informações solicitadas com precisão.
+                Esses detalhes são importantes para ajudar os desenvolvedores a entenderem e
+                corrigirem o defeito de forma eficiente.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <div class="control">
-                    <p>
-                      <span class="has-text-danger">*</span> Requisito ou trecho da documentação
-                    </p>
+                    <p><span class="has-text-danger">*</span> Defeito</p>
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
@@ -81,7 +79,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.BugReport)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -89,10 +87,10 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
+  '1. Identificação do Defeito:\n   - Título/Resumo do Defeito: Botão "Enviar" não está funcional\n   - ID do Defeito (se aplicável): 0002\n   - Data de Identificação: 01/05/2023\n   - Prioridade: Alta\n   - Severidade: Média\n\n2. Descrição do Defeito:\nAo clicar no botão "Enviar" no formulário de contato, nada acontece. O botão não está funcional e não realiza nenhuma ação. Não há mensagens de erro exibidas.\n\n\n\n3. Passos para Reproduzir o Defeito:\n   \n1. Acesse a página de contato do site.\n2. Preencha todos os campos obrigatórios do formulário.\n3. Clique no botão "Enviar".\n\n4. Comportamento Esperado:\nApós clicar no botão "Enviar", o formulário deveria ser submetido e uma mensagem de confirmação deveria ser exibida ao usuário.\n\n\n\n5. Contexto e Ambiente:\n   - Ambiente de Teste: \nWindows 10, Google Chrome versão 90.0.4430.212\n\n \n6. Dados de Entrada:\n   - Valores Inseridos nos Campos: \nNome: João Silva, E-mail: joao@example.com, Mensagem: "Teste de contato."\n  \n7. Observações Adicionais:\nO botão "Enviar" é fundamental para que os usuários possam entrar em contato conosco. É importante corrigir esse defeito o mais rápido possível \n\n'
 );
 
-const context = ref('Ex.: Sistema de cartão de credito de um banco');
+const context = ref('Ex.: Sistema de Academia X\nRelease de julho\nTestes UAT\n\n');
 
 const loading = ref(false);
 
@@ -106,7 +104,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestGenerator
+      type: TestTypeEnum.BugReport
     });
     result.value = response.message;
     scrollDown();

@@ -3,31 +3,27 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.StepGenerator"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
-          :pageName="MenuComponentEnum.TestGenerator"
+          :pageName="MenuComponentEnum.StepGenerator"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestGenerator" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.StepGenerator" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestGenerator }}</p>
+              <p class="title">{{ MenuComponentEnum.StepGenerator }}</p>
               <p class="subtitle">
-                Olá! Bem-vindo(a) à nossa ferramenta de geração de casos de teste para validação de
-                software. Por favor, forneça-nos um trecho da documentação do software ou um
-                requisito específico que deseja validar. Com base nessa entrada, nosso sistema
-                gerará casos de teste funcionais para você
+                Gere todo passo a passo de seu caso de teste, forneça o nome, descrição de seu caso
+                de teste.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <div class="control">
-                    <p>
-                      <span class="has-text-danger">*</span> Requisito ou trecho da documentação
-                    </p>
+                    <p><span class="has-text-danger">*</span> Caso de Teste</p>
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
@@ -81,18 +77,16 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.StepGenerator)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
   }
 }
 
-const requirement = ref(
-  'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
-);
+const requirement = ref('Ex.: Login com sucesso com redirecionamento para contratação de planos');
 
-const context = ref('Ex.: Sistema de cartão de credito de um banco');
+const context = ref('Ex.: Sistema de academia');
 
 const loading = ref(false);
 
@@ -106,7 +100,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestGenerator
+      type: TestTypeEnum.StepGenerator
     });
     result.value = response.message;
     scrollDown();

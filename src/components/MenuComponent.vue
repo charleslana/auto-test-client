@@ -66,8 +66,20 @@
     </ul>
     <p class="menu-label">Ferramentas avançadas</p>
     <ul class="menu-list">
-      <li><a>Plano de Testes</a></li>
-      <li><a>Indicadores de Qualidade</a></li>
+      <li>
+        <RouterLink
+          to="/panel/test-plan"
+          :class="{ 'is-active': activePage === MenuComponentEnum.TestPlan }"
+          >{{ MenuComponentEnum.TestPlan }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/quality-indicator"
+          :class="{ 'is-active': activePage === MenuComponentEnum.QualityIndicator }"
+          >{{ MenuComponentEnum.QualityIndicator }}</RouterLink
+        >
+      </li>
       <li><a>Tradutor de Testes</a></li>
       <li><a>Casos de Testes de Usabilidade (UX)</a></li>
       <li><a>Gerador de Massa de Testes</a></li>
@@ -82,7 +94,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import MenuComponentEnum from '../enum/MenuComponentEnum';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 defineProps({
   activePage: {
     type: String as () => MenuComponentEnum,
@@ -115,4 +127,3 @@ defineProps({
   font-weight: 700;
 }
 </style>
-../enum/MenuComponentEnum
