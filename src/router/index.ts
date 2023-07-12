@@ -13,6 +13,7 @@ import ShopView from '@/views/panel/ShopView.vue';
 import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
 import TestPlanView from '@/views/panel/TestPlanView.vue';
+import TestTranslatorView from '@/views/panel/TestTranslatorView.vue';
 import UserDetailsView from '@/views/panel/UserDetailsView.vue';
 import UserProfileView from '@/views/panel/UserProfileView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -78,6 +79,12 @@ const router = createRouter({
       name: 'panel-quality-indicator',
       component: QualityIndicatorView,
       meta: { title: 'Auto test - Indicadores de Qualidade' }
+    },
+    {
+      path: '/panel/test-translator',
+      name: 'panel-test-translator',
+      component: TestTranslatorView,
+      meta: { title: 'Auto test - Tradutor de Testes' }
     },
     {
       path: '/panel/historic',

@@ -80,7 +80,13 @@
           >{{ MenuComponentEnum.QualityIndicator }}</RouterLink
         >
       </li>
-      <li><a>Tradutor de Testes</a></li>
+      <li>
+        <RouterLink
+          to="/panel/test-translator"
+          :class="{ 'is-active': activePage === MenuComponentEnum.TestTranslator }"
+          >{{ MenuComponentEnum.TestTranslator }}</RouterLink
+        >
+      </li>
       <li><a>Casos de Testes de Usabilidade (UX)</a></li>
       <li><a>Gerador de Massa de Testes</a></li>
       <li><a>Linguagem Gherkin</a></li>

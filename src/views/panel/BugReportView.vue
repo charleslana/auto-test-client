@@ -24,14 +24,14 @@
               </p>
               <form @submit.prevent="send">
                 <div class="field">
+                  <label class="label"><span class="has-text-danger">*</span> Defeito:</label>
                   <div class="control">
-                    <p><span class="has-text-danger">*</span> Defeito</p>
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
                 <div class="field">
+                  <label class="label">Contexto:</label>
                   <div class="control">
-                    <p>Contexto</p>
                     <textarea class="textarea is-medium" v-model="context"></textarea>
                   </div>
                 </div>
