@@ -51,4 +51,9 @@ export default class UserService {
     const response = await api.get(url);
     return response.data;
   }
+
+  static async getProfile(id: string) {
+    const response = await api.get(`/user/profile/${id}`);
+    return response.data;
+  }
 }

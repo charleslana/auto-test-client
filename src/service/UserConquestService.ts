@@ -5,4 +5,9 @@ export default class UserConquestService {
     const response = await api.get('/user/conquest');
     return response.data;
   }
+
+  static async getAllById(id: string) {
+    const response = await api.get(`/user/conquest/by/${id}`);
+    return response.data;
+  }
 }

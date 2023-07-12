@@ -3,11 +3,11 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.Profile"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.NavBar"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
-          :links="[{ to: '/panel/dashboard', name: 'Geral' }]"
+          :links="[{ to: '/panel/rank', name: 'Classificação' }]"
           :pageName="MenuComponentEnum.Profile"
         ></BreadCrumbComponent>
         <section class="hero">
@@ -45,15 +45,9 @@
                   </div>
                 </div>
               </nav>
-              <div class="is-divider" data-content="EXPERIÊNCIA"></div>
-              <progress
-                class="progress is-large is-radiusless is-success"
-                :value="calculateExperiencePercentage(user!.experience, user!.maximumExperience)"
-                max="100"
-              ></progress>
-              <div class="level">
-                <div class="level-left is-size-4">{{ user!.experience }}</div>
-                <div class="level-right is-size-4">{{ user!.maximumExperience }}</div>
+              <div class="mb-5">
+                Última vez conectado:
+                {{ calculateElapsedTime(new Date(user!.updatedAt.toString())) }}
               </div>
               <p class="title">Conquistas</p>
               <div v-if="userConquest.length === 0">Nenhuma conquista por enquanto.</div>
@@ -92,38 +86,42 @@ import {
   handlerError,
   formatNumber,
   formatCompactNumber,
-  calculateExperiencePercentage
+  calculateElapsedTime
 } from '@/utils/utils';
 import UserService from '@/service/UserService';
 import type IUser from '@/interface/IUser';
 import UserConquestService from '@/service/UserConquestService';
 import type IUserConquest from '@/interface/IUserConquest';
+import router from '@/router';
+
+const id = router.currentRoute.value.params.id as string;
 
 const loading = ref(true);
 
 onMounted(async () => {
-  await getUserDetails();
-  await getUserConquest();
+  await getUserProfile();
+  await getUserByIdConquest();
 });
 
 const user = ref<IUser>();
 
-async function getUserDetails(): Promise<void> {
+async function getUserProfile(): Promise<void> {
   try {
-    const response = (await UserService.getDetails()) as IUser;
+    const response = (await UserService.getProfile(id)) as IUser;
     user.value = response;
     loading.value = false;
   } catch (error: any) {
     handlerError(error);
+    router.push({ name: 'panel-rank' });
   }
 }
 
 const userConquest = ref<IUserConquest[]>([]);
 
-async function getUserConquest(): Promise<void> {
+async function getUserByIdConquest(): Promise<void> {
   try {
     loading.value = true;
-    const response = (await UserConquestService.getAll()) as IUserConquest[];
+    const response = (await UserConquestService.getAllById(id)) as IUserConquest[];
     userConquest.value = response;
     loading.value = false;
   } catch (error: any) {

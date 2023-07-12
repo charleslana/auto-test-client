@@ -51,9 +51,7 @@
             </div>
             <LoadingComponent :loading="loading" />
             <div v-if="!loading">
-              <div v-if="result.length === 0" class="no-results">
-                Nenhum histórico foi encontrado.
-              </div>
+              <div v-if="result.length === 0">Nenhum histórico foi encontrado.</div>
               <div class="card mb-2" v-for="item in result" :key="item.id">
                 <div class="card-content">
                   <div class="media">

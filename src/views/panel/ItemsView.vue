@@ -29,8 +29,8 @@
                   </p>
                   <small class="has-text-danger" v-if="item.expirationDate !== null"
                     >O item tem expiração,
-                    {{ getRemainingTime(new Date(item.expirationDate.toString())) }}</small
-                  >
+                    {{ getRemainingTime(new Date(item.expirationDate.toString())) }}
+                  </small>
                   <small class="has-text-success" v-else
                     >Item permanente, você adquiriu ele em: {{ formatDate(item.createdAt) }}</small
                   >

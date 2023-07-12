@@ -1,15 +1,16 @@
-import ConquestView from '../views/panel/ConquestView.vue';
-import DashboardView from '../views/panel/DashboardView.vue';
-import HistoricDetailsView from '../views/panel/HistoricDetailsView.vue';
-import HistoricView from '../views/panel/HistoricView.vue';
-import HomeView from '../views/HomeView.vue';
-import ItemsView from '../views/panel/ItemsView.vue';
-import LoginView from '../views/LoginView.vue';
-import RankView from '../views/panel/RankView.vue';
-import RegisterView from '../views/RegisterView.vue';
-import ShopView from '../views/panel/ShopView.vue';
-import TestGeneratorView from '../views/panel/TestGeneratorView.vue';
-import UserDetailsView from '../views/panel/UserDetailsView.vue';
+import ConquestView from '@/views/panel/ConquestView.vue';
+import DashboardView from '@/views/panel/DashboardView.vue';
+import HistoricDetailsView from '@/views/panel/HistoricDetailsView.vue';
+import HistoricView from '@/views/panel/HistoricView.vue';
+import HomeView from '@/views/HomeView.vue';
+import ItemsView from '@/views/panel/ItemsView.vue';
+import LoginView from '@/views/LoginView.vue';
+import RankView from '@/views/panel/RankView.vue';
+import RegisterView from '@/views/RegisterView.vue';
+import ShopView from '@/views/panel/ShopView.vue';
+import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
+import UserDetailsView from '@/views/panel/UserDetailsView.vue';
+import UserProfileView from '@/views/panel/UserProfileView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -91,6 +92,12 @@ const router = createRouter({
       name: 'panel-rank',
       component: RankView,
       meta: { title: 'Auto test - Classificação' }
+    },
+    {
+      path: '/panel/profile/:id',
+      name: 'panel-profile',
+      component: UserProfileView,
+      meta: { title: 'Auto test - Perfil' }
     }
   ]
 });

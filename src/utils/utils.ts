@@ -107,17 +107,41 @@ export function calculateExperiencePercentage(
   return Math.min(percentage, 100);
 }
 
-export const getRemainingTime = (targetDate: Date) => {
+export const getRemainingTime = (targetDate: Date): string => {
   const currentDate = new Date();
   const timeDifference = targetDate.getTime() - currentDate.getTime();
   if (timeDifference > 86400000) {
     const daysRemaining = Math.floor(timeDifference / 86400000);
-    return `Faltam ${daysRemaining} dias restantes`;
+    return `Faltam ${daysRemaining} ${daysRemaining === 1 ? 'dia' : 'dias'} restante${
+      daysRemaining === 1 ? '' : 's'
+    }`;
   }
   if (timeDifference > 3600000) {
     const hoursRemaining = Math.floor(timeDifference / 3600000);
-    return `Faltam ${hoursRemaining} horas restantes`;
+    return `Faltam ${hoursRemaining} ${hoursRemaining === 1 ? 'hora' : 'horas'} restante${
+      hoursRemaining === 1 ? '' : 's'
+    }`;
   }
   const minutesRemaining = Math.floor(timeDifference / 60000);
-  return `Faltam ${minutesRemaining} minutos restantes`;
+  return `Faltam ${minutesRemaining} ${minutesRemaining === 1 ? 'minuto' : 'minutos'} restante${
+    minutesRemaining === 1 ? '' : 's'
+  }`;
+};
+
+export const calculateElapsedTime = (startDate: Date): string => {
+  const currentDate = new Date();
+  const timeDifference = currentDate.getTime() - startDate.getTime();
+  if (timeDifference < 60000) {
+    return 'Agora mesmo';
+  }
+  if (timeDifference < 3600000) {
+    const minutesElapsed = Math.floor(timeDifference / 60000);
+    return `${minutesElapsed} ${minutesElapsed === 1 ? 'minuto' : 'minutos'} atrás`;
+  }
+  if (timeDifference < 86400000) {
+    const hoursElapsed = Math.floor(timeDifference / 3600000);
+    return `${hoursElapsed} ${hoursElapsed === 1 ? 'hora' : 'horas'} atrás`;
+  }
+  const daysElapsed = Math.floor(timeDifference / 86400000);
+  return `${daysElapsed} ${daysElapsed === 1 ? 'dia' : 'dias'} atrás`;
 };

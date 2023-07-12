@@ -62,7 +62,10 @@
                     <td>{{ formatNumber(item.score) }}</td>
                     <td>{{ item.level }}</td>
                     <td>{{ item.experience }}</td>
-                    <td>
+                    <td v-if="rank == (currentPage - 1) * 10 + index + 1">
+                      <RouterLink to="/panel/user/details">Ver perfil</RouterLink>
+                    </td>
+                    <td v-else>
                       <RouterLink :to="'/panel/profile/' + item.id">Ver perfil</RouterLink>
                     </td>
                   </tr>

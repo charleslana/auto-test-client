@@ -7,4 +7,5 @@ export default interface IUser {
   experience: number;
   score: number;
   createdAt: Date;
+  updatedAt: Date;
 }
