@@ -81,8 +81,8 @@
 </template>
 
 <script setup lang="ts">
-// import { RouterLink } from 'vue-router';
-import MenuComponentEnum from '../enum/menuComponentEnum';
+import { RouterLink } from 'vue-router';
+import MenuComponentEnum from '../enum/MenuComponentEnum';
 defineProps({
   activePage: {
     type: String as () => MenuComponentEnum,
@@ -115,3 +115,4 @@ defineProps({
   font-weight: 700;
 }
 </style>
+../enum/MenuComponentEnum

@@ -1,9 +1,8 @@
 import type TestTypeEnum from '@/enum/TestTypeEnum';
 
-export default interface IUserHistoric {
-  id: string;
+export default interface IOpenAI {
   input: string;
-  output: string;
+  context?: string;
   type: TestTypeEnum;
-  createdAt: Date;
+  output?: string;
 }

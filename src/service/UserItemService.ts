@@ -1,5 +1,5 @@
 import api from '@/config/api';
-import type TestTypeEnum from '@/enum/testTypeEnum';
+import type TestTypeEnum from '@/enum/TestTypeEnum';
 
 export default class UserItemService {
   static async validateItem(type: TestTypeEnum) {

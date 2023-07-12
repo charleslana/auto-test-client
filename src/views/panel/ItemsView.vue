@@ -45,14 +45,14 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import { onMounted, ref } from 'vue';
 import type IUserItem from '@/interface/IUserItem';
-import UserItemService from '@/service/userItemService';
+import UserItemService from '@/service/UserItemService';
 import { formatDate, handlerError, getRemainingTime } from '@/utils/utils';
 
 const loading = ref(true);

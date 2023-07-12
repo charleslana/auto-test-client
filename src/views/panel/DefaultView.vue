@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 </script>
 
 <style scoped></style>

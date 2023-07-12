@@ -58,17 +58,17 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import { onMounted, ref } from 'vue';
 import type IConquest from '@/interface/IConquest';
-import ConquestService from '@/service/conquestService';
-import UserService from '@/service/userService';
+import ConquestService from '@/service/ConquestService';
+import UserService from '@/service/UserService';
 import { formatNumber, handlerError, calculateExperiencePercentage } from '@/utils/utils';
-import TestTypeEnum from '@/enum/testTypeEnum';
+import TestTypeEnum from '@/enum/TestTypeEnum';
 
 const loading = ref(true);
 

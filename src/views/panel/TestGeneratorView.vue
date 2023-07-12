@@ -10,11 +10,7 @@
           :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
           pageName="Gerador de Testes"
         ></BreadCrumbComponent>
-        <progress
-          class="progress is-small is-info is-radiusless"
-          max="100"
-          v-if="loadingItem"
-        ></progress>
+        <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
           <BlockedPageComponent pageName="Gerador de Testes" v-if="!open" />
           <section class="hero" v-if="open">
@@ -63,16 +59,17 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
-import UserItemService from '@/service/userItemService';
-import TestTypeEnum from '@/enum/testTypeEnum';
+import UserItemService from '@/service/UserItemService';
+import TestTypeEnum from '@/enum/TestTypeEnum';
 import { handlerError, formatBreakLines } from '@/utils/utils';
 import BlockedPageComponent from '../../components/BlockedPageComponent.vue';
-import OpenaiService from '@/service/openaiService';
+import OpenAIService from '@/service/OpenAIService';
+import LoadingComponent from '@/components/LoadingComponent.vue';
 
 onMounted(async () => {
   await validateItem();
@@ -106,7 +103,7 @@ async function send(): Promise<void> {
     validateInput(requirement.value);
     loading.value = true;
     result.value = null;
-    const response = await OpenaiService.send({
+    const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
       type: TestTypeEnum.TestGenerator

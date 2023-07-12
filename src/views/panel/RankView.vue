@@ -99,14 +99,14 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import LoadingComponent from '@/components/LoadingComponent.vue';
-import RankFilterEnum from '../../enum/rankFilterEnum';
+import RankFilterEnum from '@/enum/RankFilterEnum';
 import { computed, onMounted, ref } from 'vue';
-import UserService from '@/service/userService';
+import UserService from '@/service/UserService';
 import type IUser from '@/interface/IUser';
 import { formatNumber, handlerError } from '@/utils/utils';
 import { RouterLink } from 'vue-router';

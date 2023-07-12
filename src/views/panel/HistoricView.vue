@@ -49,9 +49,11 @@
                 </button>
               </div>
             </div>
-            <div v-if="showNoResults" class="no-results">Nenhum resultado foi encontrado.</div>
             <LoadingComponent :loading="loading" />
             <div v-if="!loading">
+              <div v-if="result.length === 0" class="no-results">
+                Nenhum histórico foi encontrado.
+              </div>
               <div class="card mb-2" v-for="item in result" :key="item.id">
                 <div class="card-content">
                   <div class="media">
@@ -128,10 +130,10 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { ref, onMounted, computed } from 'vue';
 import {
   handlerError,
@@ -140,11 +142,11 @@ import {
   addOverflowHidden,
   removeOverflowHidden,
   getMenuComponentTitle
-} from '../../utils/utils';
-import UserHistoricService from '../../service/userHistoricService';
-import type IUserHistoric from '../../interface/IUserHistoric';
-import type TestTypeEnum from '@/enum/testTypeEnum';
-import ToastEnum from '@/enum/toastEnum';
+} from '@/utils/utils';
+import UserHistoricService from '@/service/UserHistoricService';
+import type IUserHistoric from '@/interface/IUserHistoric';
+import type TestTypeEnum from '@/enum/TestTypeEnum';
+import ToastEnum from '@/enum/ToastEnum';
 import { saveAs } from 'file-saver';
 import { RouterLink } from 'vue-router';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -188,11 +190,8 @@ const result = ref<IUserHistoric[]>([]);
 
 const levelRef = ref<HTMLElement | null>(null);
 
-const showNoResults = ref(false);
-
 async function getUserHistoric(): Promise<void> {
   try {
-    showNoResults.value = false;
     loading.value = true;
     const response = await UserHistoricService.getPaginated({
       page: page.value,
@@ -203,19 +202,14 @@ async function getUserHistoric(): Promise<void> {
     totalPages.value = response.totalPages as number;
     currentPage.value = response.currentPage as number;
     hasNextPage.value = response.hasNextPage as boolean;
+    loading.value = false;
     setTimeout(() => {
       if (levelRef.value !== null) {
         levelRef.value.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
   } catch (error: any) {
-    showNoResults.value = true;
-    result.value = [];
-    totalPages.value = 0;
-    totalCount.value = 0;
-    hasNextPage.value = false;
-  } finally {
-    loading.value = false;
+    handlerError(error);
   }
 }
 
@@ -286,7 +280,7 @@ async function exportXLSX(): Promise<void> {
     saveAs(blob, 'Histórico.xlsx');
     showToast('Exportação do histórico realizada com sucesso.', ToastEnum.Success);
   } catch (error: any) {
-    showToast('Nenhum resultado foi encontrado.', ToastEnum.Danger);
+    showToast('Nenhum histórico foi encontrado.', ToastEnum.Danger);
   } finally {
     loadingXLSXButton.value = false;
   }

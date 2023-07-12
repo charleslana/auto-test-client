@@ -1,4 +1,4 @@
-import type TestTypeEnum from '@/enum/testTypeEnum';
+import type TestTypeEnum from '@/enum/TestTypeEnum';
 
 export default interface IItem {
   id: string;

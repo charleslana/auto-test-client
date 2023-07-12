@@ -1,6 +1,6 @@
-import MenuComponentEnum from '@/enum/menuComponentEnum';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import router from '@/router';
-import ToastEnum from '@/enum/toastEnum';
+import ToastEnum from '@/enum/ToastEnum';
 import { getTokenFromLocalStorage } from './localStorageUtils';
 import { toast } from 'bulma-toast';
 

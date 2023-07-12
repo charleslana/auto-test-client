@@ -89,13 +89,13 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import { onMounted, ref } from 'vue';
-import ShopService from '@/service/shopService';
+import ShopService from '@/service/ShopService';
 import {
   handlerError,
   formatNumber,
@@ -104,11 +104,11 @@ import {
   removeOverflowHidden
 } from '@/utils/utils';
 import type IShop from '@/interface/IShop';
-import UserService from '@/service/userService';
+import UserService from '@/service/UserService';
 import type IUser from '@/interface/IUser';
-import ToastEnum from '@/enum/toastEnum';
+import ToastEnum from '@/enum/ToastEnum';
 import type IUserItem from '@/interface/IUserItem';
-import UserItemService from '@/service/userItemService';
+import UserItemService from '@/service/UserItemService';
 
 const loading = ref(true);
 

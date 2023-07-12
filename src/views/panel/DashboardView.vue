@@ -195,16 +195,16 @@
 </template>
 
 <script setup lang="ts">
-import NavBarComponent from '../../components/NavBarComponent.vue';
-import MenuComponent from '../../components/MenuComponent.vue';
-import BreadCrumbComponent from '../../components/BreadCrumbComponent.vue';
-import MenuComponentEnum from '../../enum/menuComponentEnum';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
+import BreadCrumbComponent from '@/components/BreadCrumbComponent.vue';
+import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { ref, onMounted } from 'vue';
-import { formatCompactNumber } from '../../utils/utils';
-import UserService from '@/service/userService';
+import { formatCompactNumber } from '@/utils/utils';
+import UserService from '@/service/UserService';
 import { handlerError, showToast, addOverflowHidden, removeOverflowHidden } from '@/utils/utils';
 import type IUser from '@/interface/IUser';
-import ToastEnum from '@/enum/toastEnum';
+import ToastEnum from '@/enum/ToastEnum';
 import type ITest from '@/interface/ITest';
 import { Skeletor } from 'vue-skeletor';
 

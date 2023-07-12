@@ -18,7 +18,12 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     const token = getTokenFromLocalStorage();
-    if (error.response?.status === 401 || error.response?.status === 429 || !token) {
+    const excludedRoutes = ['home', 'login', 'register'];
+    if (
+      error.response?.status === 401 ||
+      error.response?.status === 429 ||
+      (!token && !excludedRoutes.includes(router.currentRoute.value.name as string))
+    ) {
       removeTokenFromLocalStorage();
       router.push({ name: 'login' });
     }

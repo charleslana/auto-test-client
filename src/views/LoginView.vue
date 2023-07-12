@@ -52,9 +52,9 @@
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
-import UserService from '@/service/userService';
+import UserService from '@/service/UserService';
 import { handlerError, redirectToDashboardPage } from '@/utils/utils';
-import { saveTokenToLocalStorage } from '../utils/localStorageUtils';
+import { saveTokenToLocalStorage } from '@/utils/localStorageUtils';
 
 onMounted(() => {
   redirectToDashboardPage();
