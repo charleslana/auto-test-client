@@ -3,44 +3,37 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.GherkinLanguage"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.APITest"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
-          :pageName="MenuComponentEnum.GherkinLanguage"
+          :pageName="MenuComponentEnum.APITest"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.GherkinLanguage" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.APITest" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.GherkinLanguage }}</p>
+              <p class="title">{{ MenuComponentEnum.APITest }}</p>
               <p class="subtitle">
-                Apresentamos o Gerador de Testes em Linguagem Gherkin, uma ferramenta poderosa e
-                intuitiva projetada para simplificar a criação de casos de teste. Com nossa
-                ferramenta, você pode facilmente gerar casos de teste em Gherkin, uma linguagem
-                simples e legível, ideal para especificações de comportamento. Automatize seus
-                testes com facilidade, economizando tempo valioso no desenvolvimento de software.
+                Este é o gerador de testes de API. Por favor, forneça-nos uma API com detalhes como
+                endpoint, parâmetros de entrada e saída e se possível um exemplo de chamada e
+                resposta da API.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <label class="label"
-                    ><span class="has-text-danger">*</span> Requisito ou trecho da
-                    documentação:</label
+                    ><span class="has-text-danger">*</span> API ou trecho da documentação:</label
                   >
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label">Contexto:</label>
+                  <label class="label">Requisição e Resposta:</label>
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      v-model="context"
-                      placeholder="Entre com informações sobre o ambiente, atores envolvidos e etapas principais ou variáveis para criar cenários mais detalhados"
-                    ></textarea>
+                    <textarea class="textarea is-medium" v-model="context"></textarea>
                   </div>
                 </div>
                 <small>Esta ação pode demorar um pouco.</small>
@@ -87,7 +80,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.GherkinLanguage)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.APITest)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -95,10 +88,12 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'O sistema deve permitir que os usuários se cadastrem fornecendo seu nome, e-mail e senha. e mostrar uma mensagem de erro caso algum campo não seja preenchido'
+  'API de Previsão do Tempo\n\nEndpoint: https://api.weatherforecast.com/forecast\n\nParâmetros:\n\nlocation: A localização para a qual deseja obter a previsão do tempo (obrigatório)\ndate: A data para a qual deseja obter a previsão do tempo (opcional)\nFormato de Resposta:\nA API retorna os dados em formato JSON com as seguintes informações:\n\ntemperature: Temperatura atual\ndescription: Descrição do clima\nhumidity: Umidade\nwind_speed: Velocidade do vento'
 );
 
-const context = ref<string | undefined>(undefined);
+const context = ref<string | undefined>(
+  'Exemplo de chamada de API:\n\nEndpoint: https://api.weatherforecast.com/forecast?location=New+York\n\nExemplo de resposta da API:\n{\n  "temperature": 25,\n  "description": "Ensolarado",\n  "humidity": 60,\n  "wind_speed": 10\n}\n\n'
+);
 
 const loading = ref(false);
 
@@ -113,7 +108,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.GherkinLanguage
+      type: TestTypeEnum.APITest
     });
     result.value = response.message;
     scrollDown();

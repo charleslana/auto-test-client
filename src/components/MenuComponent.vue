@@ -108,10 +108,34 @@
           >{{ MenuComponentEnum.GherkinLanguage }}</RouterLink
         >
       </li>
-      <li><a>Testes de Segurança</a></li>
-      <li><a>Testes de Performance</a></li>
-      <li><a>Testes de API</a></li>
-      <li><a>Construtor de Query SQL</a></li>
+      <li>
+        <RouterLink
+          to="/panel/security-test"
+          :class="{ 'is-active': activePage === MenuComponentEnum.SecurityTest }"
+          >{{ MenuComponentEnum.SecurityTest }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/performance-test"
+          :class="{ 'is-active': activePage === MenuComponentEnum.PerformanceTest }"
+          >{{ MenuComponentEnum.PerformanceTest }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/api-test"
+          :class="{ 'is-active': activePage === MenuComponentEnum.APITest }"
+          >{{ MenuComponentEnum.APITest }}</RouterLink
+        >
+      </li>
+      <li>
+        <RouterLink
+          to="/panel/sql-query-builder"
+          :class="{ 'is-active': activePage === MenuComponentEnum.SQLQueryBuilder }"
+          >{{ MenuComponentEnum.SQLQueryBuilder }}</RouterLink
+        >
+      </li>
     </ul>
   </aside>
 </template>

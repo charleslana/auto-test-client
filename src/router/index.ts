@@ -1,3 +1,4 @@
+import APITestView from '@/views/panel/APITestView.vue';
 import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
 import DashboardView from '@/views/panel/DashboardView.vue';
@@ -7,10 +8,13 @@ import HistoricView from '@/views/panel/HistoricView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ItemsView from '@/views/panel/ItemsView.vue';
 import LoginView from '@/views/LoginView.vue';
+import PerformanceTestView from '@/views/panel/PerformanceTestView.vue';
 import QualityIndicatorView from '@/views/panel/QualityIndicatorView.vue';
 import RankView from '@/views/panel/RankView.vue';
 import RegisterView from '@/views/RegisterView.vue';
+import SecurityTestView from '@/views/panel/SecurityTestView.vue';
 import ShopView from '@/views/panel/ShopView.vue';
+import SQLQueryBuilderView from '@/views/panel/SQLQueryBuilderView.vue';
 import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
 import TestMassGeneratorView from '@/views/panel/TestMassGeneratorView.vue';
@@ -106,6 +110,30 @@ const router = createRouter({
       name: 'panel-gherkin-language',
       component: GherkinLanguageView,
       meta: { title: 'Auto test - Linguagem Gherkin' }
+    },
+    {
+      path: '/panel/security-test',
+      name: 'panel-security-test',
+      component: SecurityTestView,
+      meta: { title: 'Auto test - Testes de Segurança' }
+    },
+    {
+      path: '/panel/performance-test',
+      name: 'panel-performance-test',
+      component: PerformanceTestView,
+      meta: { title: 'Auto test - Testes de Performance' }
+    },
+    {
+      path: '/panel/api-test',
+      name: 'panel-api-test',
+      component: APITestView,
+      meta: { title: 'Auto test - Testes de API' }
+    },
+    {
+      path: '/panel/sql-query-builder',
+      name: 'panel-sql-query-builder',
+      component: SQLQueryBuilderView,
+      meta: { title: 'Auto test - Construtor de Query SQL' }
     },
     {
       path: '/panel/historic',
