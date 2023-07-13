@@ -101,7 +101,13 @@
           >{{ MenuComponentEnum.TestMassGenerator }}</RouterLink
         >
       </li>
-      <li><a>Linguagem Gherkin</a></li>
+      <li>
+        <RouterLink
+          to="/panel/gherkin-language"
+          :class="{ 'is-active': activePage === MenuComponentEnum.GherkinLanguage }"
+          >{{ MenuComponentEnum.GherkinLanguage }}</RouterLink
+        >
+      </li>
       <li><a>Testes de Segurança</a></li>
       <li><a>Testes de Performance</a></li>
       <li><a>Testes de API</a></li>

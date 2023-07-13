@@ -64,7 +64,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, validateInput, scrollDown } from '@/utils/utils';
+import { handlerError, formatBreakLines, validateInput, scrollDown, getInput } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -90,7 +90,9 @@ const requirement = ref(
   '1. Identificação do Defeito:\n   - Título/Resumo do Defeito: Botão "Enviar" não está funcional\n   - ID do Defeito (se aplicável): 0002\n   - Data de Identificação: 01/05/2023\n   - Prioridade: Alta\n   - Severidade: Média\n\n2. Descrição do Defeito:\nAo clicar no botão "Enviar" no formulário de contato, nada acontece. O botão não está funcional e não realiza nenhuma ação. Não há mensagens de erro exibidas.\n\n\n\n3. Passos para Reproduzir o Defeito:\n   \n1. Acesse a página de contato do site.\n2. Preencha todos os campos obrigatórios do formulário.\n3. Clique no botão "Enviar".\n\n4. Comportamento Esperado:\nApós clicar no botão "Enviar", o formulário deveria ser submetido e uma mensagem de confirmação deveria ser exibida ao usuário.\n\n\n\n5. Contexto e Ambiente:\n   - Ambiente de Teste: \nWindows 10, Google Chrome versão 90.0.4430.212\n\n \n6. Dados de Entrada:\n   - Valores Inseridos nos Campos: \nNome: João Silva, E-mail: joao@example.com, Mensagem: "Teste de contato."\n  \n7. Observações Adicionais:\nO botão "Enviar" é fundamental para que os usuários possam entrar em contato conosco. É importante corrigir esse defeito o mais rápido possível \n\n'
 );
 
-const context = ref('Ex.: Sistema de Academia X\nRelease de julho\nTestes UAT\n\n');
+const context = ref<string | undefined>(
+  'Ex.: Sistema de Academia X\nRelease de julho\nTestes UAT\n\n'
+);
 
 const loading = ref(false);
 
@@ -99,6 +101,7 @@ const result = ref<string | null>(null);
 async function send(): Promise<void> {
   try {
     validateInput(requirement.value);
+    context.value = getInput(context.value);
     loading.value = true;
     result.value = null;
     const response = await OpenAIService.send({

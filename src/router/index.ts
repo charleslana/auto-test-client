@@ -1,6 +1,7 @@
 import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
 import DashboardView from '@/views/panel/DashboardView.vue';
+import GherkinLanguageView from '@/views/panel/GherkinLanguageView.vue';
 import HistoricDetailsView from '@/views/panel/HistoricDetailsView.vue';
 import HistoricView from '@/views/panel/HistoricView.vue';
 import HomeView from '@/views/HomeView.vue';
@@ -99,6 +100,12 @@ const router = createRouter({
       name: 'panel-test-mass-generator',
       component: TestMassGeneratorView,
       meta: { title: 'Auto test - Gerador de Massa de Testes' }
+    },
+    {
+      path: '/panel/gherkin-language',
+      name: 'panel-gherkin-language',
+      component: GherkinLanguageView,
+      meta: { title: 'Auto test - Linguagem Gherkin' }
     },
     {
       path: '/panel/historic',

@@ -160,3 +160,13 @@ export function validateInput(input: string): void {
     throw new Error('Você deve preencher corretamente o campo de entrada');
   }
 }
+
+export function getInput(input: string | undefined): string | undefined {
+  if (!input) {
+    return undefined;
+  }
+  if (input.trim() === '') {
+    return undefined;
+  }
+  return input;
+}

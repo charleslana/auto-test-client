@@ -67,7 +67,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, validateInput, scrollDown } from '@/utils/utils';
+import { handlerError, formatBreakLines, validateInput, scrollDown, getInput } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -93,7 +93,7 @@ const requirement = ref(
   'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
 );
 
-const context = ref('Ex.: Sistema de cartão de credito de um banco');
+const context = ref<string | undefined>('Ex.: Sistema de cartão de credito de um banco');
 
 const loading = ref(false);
 
@@ -102,6 +102,7 @@ const result = ref<string | null>(null);
 async function send(): Promise<void> {
   try {
     validateInput(requirement.value);
+    context.value = getInput(context.value);
     loading.value = true;
     result.value = null;
     const response = await OpenAIService.send({

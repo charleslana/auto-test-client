@@ -66,7 +66,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, validateInput, scrollDown } from '@/utils/utils';
+import { handlerError, formatBreakLines, validateInput, scrollDown, getInput } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -92,7 +92,7 @@ const requirement = ref(
   '[TOTAL DE CASOS DE TESTE]: 620\n[CASOS DE TESTE EXECUTADOS]: 231\n[CASOS DE TESTE COM FALHA]: 113\n[TOTAL DE DEFEITOS ENCONTRADOS]: 120\n[DEFEITOS CORRIGIDOS]: 65\n[DEFEITOS REABERTOS]: 30\n[DEFEITOS EM ABERTO]: 82\n[DEFEITOS REJEITADOS]: 3'
 );
 
-const context = ref(
+const context = ref<string | undefined>(
   'A taxa de sucesso do meu projeto é medida pelos testes passed sobre os testes executados\nA densidade de defeitos de meu projeto é calculada pelo numero de defeitos encontrados dividido pela quantidade de testes executados\n\n'
 );
 
@@ -103,6 +103,7 @@ const result = ref<string | null>(null);
 async function send(): Promise<void> {
   try {
     validateInput(requirement.value);
+    context.value = getInput(context.value);
     loading.value = true;
     result.value = null;
     const response = await OpenAIService.send({

@@ -66,7 +66,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, validateInput, scrollDown } from '@/utils/utils';
+import { handlerError, formatBreakLines, validateInput, scrollDown, getInput } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -90,7 +90,7 @@ async function validateItem(): Promise<void> {
 
 const requirement = ref('Realizar uma reserva de hotel em um aplicativo de viagens');
 
-const context = ref(
+const context = ref<string | undefined>(
   'Imagine que você é um usuário que está utilizando um aplicativo de viagens para realizar uma reserva de hotel. O aplicativo permite que os usuários encontrem e reservem hotéis em diferentes destinos. O objetivo é fornecer uma experiência de reserva de hotel intuitiva e eficiente para os usuários, garantindo que eles possam encontrar facilmente opções de hotel adequadas às suas necessidades e concluir o processo de reserva de forma rápida e sem problemas.\n\n'
 );
 
@@ -101,6 +101,7 @@ const result = ref<string | null>(null);
 async function send(): Promise<void> {
   try {
     validateInput(requirement.value);
+    context.value = getInput(context.value);
     loading.value = true;
     result.value = null;
     const response = await OpenAIService.send({

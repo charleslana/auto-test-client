@@ -3,29 +3,30 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestPlan"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.GherkinLanguage"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
-          :pageName="MenuComponentEnum.TestPlan"
+          :pageName="MenuComponentEnum.GherkinLanguage"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestPlan" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.GherkinLanguage" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestPlan }}</p>
+              <p class="title">{{ MenuComponentEnum.GherkinLanguage }}</p>
               <p class="subtitle">
-                Nossa ferramenta de geração de plano de teste vai te ajudar a gerar um plano de
-                testes completo para seu projeto de qualidade. Por favor, forneça-nos um trecho da
-                documentação do software ou um ou mais requisitos que deseja validar.
+                Apresentamos o Gerador de Testes em Linguagem Gherkin, uma ferramenta poderosa e
+                intuitiva projetada para simplificar a criação de casos de teste. Com nossa
+                ferramenta, você pode facilmente gerar casos de teste em Gherkin, uma linguagem
+                simples e legível, ideal para especificações de comportamento. Automatize seus
+                testes com facilidade, economizando tempo valioso no desenvolvimento de software.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <label class="label"
-                    ><span class="has-text-danger">*</span> Requisito ou trecho da
-                    documentação:</label
+                    ><span class="has-text-danger">*</span> Status do projeto:</label
                   >
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
@@ -34,7 +35,11 @@
                 <div class="field">
                   <label class="label">Contexto:</label>
                   <div class="control">
-                    <textarea class="textarea is-medium" v-model="context"></textarea>
+                    <textarea
+                      class="textarea is-medium"
+                      v-model="context"
+                      placeholder="Entre com informações sobre o ambiente, atores envolvidos e etapas principais ou variáveis para criar cenários mais detalhados"
+                    ></textarea>
                   </div>
                 </div>
                 <small>Esta ação pode demorar um pouco.</small>
@@ -81,7 +86,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestPlan)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.GherkinLanguage)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -89,10 +94,10 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar\n\no cartão de credito deve ser cancelado 30 dias após o cliente ficar inadimplente'
+  'O sistema deve permitir que os usuários se cadastrem fornecendo seu nome, e-mail e senha. e mostrar uma mensagem de erro caso algum campo não seja preenchido'
 );
 
-const context = ref<string | undefined>('Ex.: Sistema de cartão de credito de um banco\n\n');
+const context = ref<string | undefined>(undefined);
 
 const loading = ref(false);
 
@@ -107,7 +112,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestPlan
+      type: TestTypeEnum.GherkinLanguage
     });
     result.value = response.message;
     scrollDown();
