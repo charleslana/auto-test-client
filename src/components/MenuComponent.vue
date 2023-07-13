@@ -94,7 +94,13 @@
           >{{ MenuComponentEnum.UsabilityTestCase }}</RouterLink
         >
       </li>
-      <li><a>Gerador de Massa de Testes</a></li>
+      <li>
+        <RouterLink
+          to="/panel/test-mass-generator"
+          :class="{ 'is-active': activePage === MenuComponentEnum.TestMassGenerator }"
+          >{{ MenuComponentEnum.TestMassGenerator }}</RouterLink
+        >
+      </li>
       <li><a>Linguagem Gherkin</a></li>
       <li><a>Testes de Segurança</a></li>
       <li><a>Testes de Performance</a></li>

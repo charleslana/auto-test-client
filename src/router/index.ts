@@ -12,6 +12,7 @@ import RegisterView from '@/views/RegisterView.vue';
 import ShopView from '@/views/panel/ShopView.vue';
 import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
+import TestMassGeneratorView from '@/views/panel/TestMassGeneratorView.vue';
 import TestPlanView from '@/views/panel/TestPlanView.vue';
 import TestTranslatorView from '@/views/panel/TestTranslatorView.vue';
 import UsabilityTestCaseView from '@/views/panel/UsabilityTestCaseView.vue';
@@ -92,6 +93,12 @@ const router = createRouter({
       name: 'panel-usability-test-case',
       component: UsabilityTestCaseView,
       meta: { title: 'Auto test - Casos de Testes de Usabilidade (UX)' }
+    },
+    {
+      path: '/panel/test-mass-generator',
+      name: 'panel-test-mass-generator',
+      component: TestMassGeneratorView,
+      meta: { title: 'Auto test - Gerador de Massa de Testes' }
     },
     {
       path: '/panel/historic',
