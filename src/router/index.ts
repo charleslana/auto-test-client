@@ -14,6 +14,7 @@ import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
 import TestPlanView from '@/views/panel/TestPlanView.vue';
 import TestTranslatorView from '@/views/panel/TestTranslatorView.vue';
+import UsabilityTestCaseView from '@/views/panel/UsabilityTestCaseView.vue';
 import UserDetailsView from '@/views/panel/UserDetailsView.vue';
 import UserProfileView from '@/views/panel/UserProfileView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -85,6 +86,12 @@ const router = createRouter({
       name: 'panel-test-translator',
       component: TestTranslatorView,
       meta: { title: 'Auto test - Tradutor de Testes' }
+    },
+    {
+      path: '/panel/usability-test-case',
+      name: 'panel-usability-test-case',
+      component: UsabilityTestCaseView,
+      meta: { title: 'Auto test - Casos de Testes de Usabilidade (UX)' }
     },
     {
       path: '/panel/historic',

@@ -87,7 +87,13 @@
           >{{ MenuComponentEnum.TestTranslator }}</RouterLink
         >
       </li>
-      <li><a>Casos de Testes de Usabilidade (UX)</a></li>
+      <li>
+        <RouterLink
+          to="/panel/usability-test-case"
+          :class="{ 'is-active': activePage === MenuComponentEnum.UsabilityTestCase }"
+          >{{ MenuComponentEnum.UsabilityTestCase }}</RouterLink
+        >
+      </li>
       <li><a>Gerador de Massa de Testes</a></li>
       <li><a>Linguagem Gherkin</a></li>
       <li><a>Testes de Segurança</a></li>
