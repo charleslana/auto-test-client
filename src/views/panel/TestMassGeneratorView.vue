@@ -18,7 +18,7 @@
               <p class="title">{{ MenuComponentEnum.TestMassGenerator }}</p>
               <p class="subtitle">
                 Precisando de Massas para seus testes? esta é a ferramenta certa. Escolha a
-                quantidade e o tipo de massa necessária que teste.ai gera pra você!
+                quantidade e o tipo de massa, a massa de dados pode ser múltiplas.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
