@@ -113,9 +113,12 @@
 import { redirectToDashboardPage } from '@/utils/utils';
 import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 onMounted(() => {
   redirectToDashboardPage();
+  AOS.init();
 });
 </script>
 

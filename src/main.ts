@@ -11,7 +11,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import './assets/lib/bulma/css/bulma.min.css';
-import './assets/lib/aos/aos.css';
 import './assets/main.css';
 import './assets/extension/bulma-divider.min.css';
 import './assets/extension/bulma-tooltip.min.css';
