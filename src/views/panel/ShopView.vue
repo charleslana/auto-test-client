@@ -43,12 +43,14 @@
                   <div
                     v-if="isItemPurchased(item.itemId)"
                     class="button card-footer-item has-text-success"
+                    disabled
                   >
                     Item já comprado
                   </div>
                   <div
                     v-else-if="score < item.score"
-                    class="button card-footer-item has-text-danger"
+                    class="button card-footer-item disabled"
+                    disabled
                   >
                     Insuficiente, preço: {{ formatNumber(item.score) }} pontos
                   </div>

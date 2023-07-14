@@ -1,5 +1,6 @@
 import api from '@/config/api';
 import type ILogin from '@/interface/ILogin';
+import type IPassword from '@/interface/IPassword';
 import type IRegister from '@/interface/IRegister';
 import type IUserPaginated from '@/interface/IUserPaginated';
 
@@ -54,6 +55,23 @@ export default class UserService {
 
   static async getProfile(id: string) {
     const response = await api.get(`/user/profile/${id}`);
+    return response.data;
+  }
+
+  static async buyName(name: string) {
+    const response = await api.put('/user/buy-name', {
+      name: name
+    });
+    return response.data;
+  }
+
+  static async getBuyName() {
+    const response = await api.get('/user/buy-name');
+    return response.data;
+  }
+
+  static async changePassword(password: IPassword) {
+    const response = await api.put('/user/change-password', password);
     return response.data;
   }
 }

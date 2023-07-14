@@ -13,6 +13,7 @@ import QualityIndicatorView from '@/views/panel/QualityIndicatorView.vue';
 import RankView from '@/views/panel/RankView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import SecurityTestView from '@/views/panel/SecurityTestView.vue';
+import SettingsView from '@/views/panel/SettingsView.vue';
 import ShopView from '@/views/panel/ShopView.vue';
 import SQLQueryBuilderView from '@/views/panel/SQLQueryBuilderView.vue';
 import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
@@ -182,6 +183,12 @@ const router = createRouter({
       name: 'panel-profile',
       component: UserProfileView,
       meta: { title: 'Auto test - Perfil' }
+    },
+    {
+      path: '/panel/settings',
+      name: 'panel-settings',
+      component: SettingsView,
+      meta: { title: 'Auto test - Configurações' }
     }
   ]
 });
