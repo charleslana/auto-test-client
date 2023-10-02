@@ -4,8 +4,21 @@
       <div class="navbar-item">
         <div class="is-size-3 is-uppercase has-text-weight-bold">Auto Test</div>
       </div>
+      <a
+        role="button"
+        class="navbar-burger"
+        :class="{ 'is-active': isMobileMenuOpen }"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+        @click="toggleMobileMenu"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
-    <div class="navbar-menu">
+    <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isMobileMenuOpen }">
       <div class="navbar-end">
         <a class="navbar-item is-uppercase" href="#why">Por que usar?</a>
         <a class="navbar-item is-uppercase" href="#free">É grátis</a>
@@ -111,15 +124,21 @@
 
 <script setup lang="ts">
 import { redirectToDashboardPage } from '@/utils/utils';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+const isMobileMenuOpen = ref(false);
 
 onMounted(() => {
   redirectToDashboardPage();
   AOS.init();
 });
+
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+}
 </script>
 
 <style scoped>
