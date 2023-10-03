@@ -2,7 +2,9 @@
   <nav class="navbar is-white">
     <div class="container">
       <div class="navbar-brand">
-        <div class="navbar-item brand-text">Auto Test</div>
+        <div class="navbar-item">
+          <img src="@/assets/images/logo.png" alt="logo image" />
+        </div>
         <div class="navbar-burger" @click="toggleMenu" :class="{ 'is-active': isMenuActive }">
           <span></span>
           <span></span>

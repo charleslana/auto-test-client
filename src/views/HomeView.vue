@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <div class="is-size-3 is-uppercase has-text-weight-bold">Auto Test</div>
+        <img src="@/assets/images/logo.png" alt="logo image" />
       </div>
       <a
         role="button"
@@ -71,7 +71,7 @@
           >
             <h1 class="titled title is-1 mb-6">uma inteligência artificial</h1>
             <h2 class="subtitled subtitle">
-              Permita que a ferramenta gere vários testes, cenários com base de um contexto enviado
+              Permita que a ferramenta gere vários testes, cenários e outras opções gerais de testes
             </h2>
           </div>
         </div>
@@ -88,7 +88,7 @@
           >
             <h1 class="title titled is-1 mb-6">conquiste com suas experiências</h1>
             <h2 class="subtitle subtitled">
-              Desbloqueie novas ferramentas com suas experiências e pontos usando o Auto Test
+              Desbloqueie novas ferramentas com pontos adquiridos na plataforma
             </h2>
           </div>
           <div
@@ -108,11 +108,10 @@
       <div class="container">
         <div class="columns is-centered">
           <div data-aos="zoom-in-up" class="column is-8">
-            <h1 class="title titled is-1 mb-6">Tente <span>e ganhe</span></h1>
+            <h1 class="title titled is-1 mb-6">Melhores <span>ferramentas</span></h1>
             <h2 class="subtitle subtitled">
-              A ideia se trata de usar e ser recompensado, ao usar a plataforma você poderá ganhar
-              pontos, conquistas, níveis e disputar classificações com outros testers, além de
-              ganhar muitas experiências!
+              Um conjunto de ferramentas que abrange as melhores técnicas para um profissional da
+              Quality Assurance
             </h2>
             <h2 class="subtitle subtitled">@CharlesLana</h2>
           </div>

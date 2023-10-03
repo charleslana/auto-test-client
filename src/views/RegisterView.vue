@@ -4,7 +4,7 @@
       <div class="column is-8 is-offset-2 register">
         <div class="columns">
           <div class="column left">
-            <h1 class="title is-1">Auto Test</h1>
+            <img src="@/assets/images/logo.png" alt="logo image" class="mb-3" />
             <h2 class="subtitle is-4">Ferramentas para testers!</h2>
             <p>
               Cadastre-se agora gratuitamente, utilize ferramentas de I.A para automatizar a vida

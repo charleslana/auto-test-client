@@ -1,5 +1,6 @@
 import APITestView from '@/views/panel/APITestView.vue';
 import AutomationCodeView from '@/views/panel/AutomationCodeView.vue';
+import BlogView from '@/views/blog/BlogView.vue';
 import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
 import CucumberCodeView from '@/views/panel/CucumberCodeView.vue';
@@ -210,6 +211,12 @@ const router = createRouter({
       name: 'panel-testing-strategy',
       component: TestingStrategyView,
       meta: { title: 'Auto test - Gerador de Estratégia de Testes' }
+    },
+    {
+      path: '/blog',
+      name: 'blog',
+      component: BlogView,
+      meta: { title: 'Auto test - Blog' }
     }
   ]
 });
