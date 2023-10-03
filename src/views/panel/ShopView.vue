@@ -84,7 +84,14 @@
         >
           Comprar
         </button>
-        <button class="button" @click="hideShopModal">Cancelar</button>
+        <button
+          class="button"
+          @click="hideShopModal"
+          :class="{ 'is-loading': loadingButton }"
+          :disabled="loadingButton"
+        >
+          Cancelar
+        </button>
       </footer>
     </div>
   </div>
