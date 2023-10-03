@@ -172,11 +172,11 @@ async function buy(): Promise<void> {
     loadingButton.value = true;
     const response = await ShopService.buy(id.value);
     showToast(response.message, ToastEnum.Success);
+    hideShopModal();
     await init();
   } catch (error: any) {
     handlerError(error);
   } finally {
-    hideShopModal();
     loadingButton.value = false;
   }
 }
