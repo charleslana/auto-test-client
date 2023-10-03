@@ -12,4 +12,7 @@ export default interface ITest {
   performanceTest: number;
   apiTest: number;
   sqlQueryBuilder: number;
+  cucumberCode: number;
+  automationCode: number;
+  testingStrategy: number;
 }

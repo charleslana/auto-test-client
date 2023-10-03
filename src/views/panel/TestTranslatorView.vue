@@ -69,7 +69,14 @@
                 </button>
               </form>
               <div v-if="result != null">
-                <div class="is-size-1">Resultado:</div>
+                <div class="level">
+                  <div class="level-left"><div class="is-size-1">Resultado:</div></div>
+                  <div class="level-right">
+                    <button class="button copy-button" @click="copyToClipboard">
+                      Copiar Texto
+                    </button>
+                  </div>
+                </div>
                 <div v-html="formatBreakLines(result)"></div>
               </div>
             </div>
@@ -88,7 +95,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { computed, onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, validateInput, scrollDown } from '@/utils/utils';
+import { handlerError, formatBreakLines, validateInput, scrollDown, copyText } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -168,6 +175,10 @@ function validateSupportedLanguage() {
   if (!inputValue.value || !filteredLanguages.value.includes(inputValue.value)) {
     throw new Error('Por favor, preencha corretamente o campo de idioma.');
   }
+}
+
+function copyToClipboard() {
+  copyText(result.value ?? '');
 }
 </script>
 

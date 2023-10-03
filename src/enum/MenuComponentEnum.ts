@@ -16,7 +16,10 @@ enum MenuComponentEnum {
   SecurityTest = 'Testes de Segurança',
   PerformanceTest = 'Testes de Performance',
   APITest = 'Testes de API',
-  SQLQueryBuilder = 'Construtor de Query SQL'
+  SQLQueryBuilder = 'Construtor de Query SQL',
+  CucumberCode = 'Código Cucumber',
+  AutomationCode = 'Código Frameworks de Automação',
+  TestingStrategy = 'Gerador de Estratégia de Testes'
 }
 
 export default MenuComponentEnum;

@@ -60,7 +60,7 @@
                 <div class="field">
                   <div class="control" v-if="!loading">
                     <button class="button is-primary" v-if="score >= price">
-                      Comprar por {{ formatNumber(price) }} pontos
+                      Alterar por {{ formatNumber(price) }} pontos
                     </button>
                     <button class="button disabled" disabled v-else>
                       Pontos insuficiente, requer {{ formatNumber(price) }} pontos

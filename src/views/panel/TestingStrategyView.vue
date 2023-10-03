@@ -3,30 +3,34 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.TestGenerator"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.TestingStrategy"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-generator', name: 'Ferramentas iniciais' }]"
-          :pageName="MenuComponentEnum.TestGenerator"
+          :pageName="MenuComponentEnum.TestingStrategy"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.TestGenerator" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.TestingStrategy" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.TestGenerator }}</p>
+              <p class="title">{{ MenuComponentEnum.TestingStrategy }}</p>
               <p class="subtitle">
-                Olá! Bem-vindo(a) à nossa ferramenta de geração de casos de teste para validação de
-                software. Por favor, forneça-nos um trecho da documentação do software ou um
-                requisito específico que deseja validar. Com base nessa entrada, nosso sistema
-                gerará casos de teste funcionais para você
+                Nossa ferramenta de geração de estratégia de testes vai te ajudar a gerar uma
+                estratégia que segue a abordagem e as etapas definidas pelo modelo ISTQB,
+                proporcionando uma estrutura sólida para o processo de teste do software. Por favor,
+                forneça-nos um trecho da documentação do software ou um ou mais requisitos que
+                deseja validar e informações relevantes como Contexto do projeto, Objetivos de
+                teste, Tipos de teste, Abordagem de teste, Ambiente de teste, Critérios de
+                aceitação, Estratégia de relatórios, Prazos e restrições. Com base nessa entrada,
+                vai gerar a melhor estratégia de testes para você.
               </p>
               <form @submit.prevent="send">
                 <div class="field">
                   <label class="label"
-                    ><span class="has-text-danger">*</span> Requisito ou trecho da
-                    documentação:</label
+                    ><span class="has-text-danger">*</span> Informações úteis ao projeto de
+                    testes:</label
                   >
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
@@ -35,7 +39,11 @@
                 <div class="field">
                   <label class="label">Contexto:</label>
                   <div class="control">
-                    <textarea class="textarea is-medium" v-model="context"></textarea>
+                    <textarea
+                      class="textarea is-medium"
+                      v-model="context"
+                      placeholder="Entre com informações sobre o ambiente, atores envolvidos e etapas principais ou variáveis especificas do seu projeto"
+                    ></textarea>
                   </div>
                 </div>
                 <small>Esta ação pode demorar um pouco.</small>
@@ -96,7 +104,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.TestGenerator)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.TestingStrategy)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -104,10 +112,10 @@ async function validateItem(): Promise<void> {
 }
 
 const requirement = ref(
-  'Ex.: o cartão de credito deve ser bloqueado 5 dias após o vencimento da fatura se o cliente não pagar'
+  'Como parte do desenvolvimento de um aplicativo de compras online para uma grande varejista de moda, precisamos criar uma estratégia de testes completa com as melhores práticas de qualidade. O aplicativo deve permitir que os usuários pesquisem produtos, adicionem itens ao carrinho, realizem pagamentos, visualizem detalhes do pedido e recebam confirmações por e-mail. Os principais objetivos de teste são garantir a funcionalidade correta, identificar e corrigir falhas, e melhorar a experiência do usuário durante o processo de compra. \n\nOs tipos de teste que desejamos incluir são testes funcionais, testes de integração, testes de desempenho e testes de usabilidade. A abordagem de teste será uma combinação de testes manuais para cenários críticos de negócio e testes automatizados para casos de teste repetitivos.\n\nPara realizar os testes, precisaremos de dispositivos móveis (iOS e Android) e navegadores (Chrome, Firefox, Safari) em diferentes sistemas operacionais. Os critérios de aceitação incluem um tempo de resposta inferior a 2 segundos, uma taxa de sucesso de pagamento superior a 95% e a aprovação de todos os principais fluxos de compra.\n\nA estratégia de relatórios envolverá relatórios de bugs detalhados com capturas de tela, registros de erros e passos para reprodução. Além disso, relatórios de métricas de teste, como cobertura de testes, tempo de execução e resultados, serão fornecidos.\n\nNosso prazo para o lançamento do aplicativo é de 2 meses e temos restrições de orçamento para ferramentas de teste. Com base nessas informações, gostaríamos que você nos fornecesse uma estratégia de testes completa, considerando as melhores práticas de qualidade.'
 );
 
-const context = ref<string | undefined>('Ex.: Sistema de cartão de credito de um banco');
+const context = ref<string | undefined>(undefined);
 
 const loading = ref(false);
 
@@ -122,7 +130,7 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.TestGenerator
+      type: TestTypeEnum.TestingStrategy
     });
     result.value = response.message;
     scrollDown();

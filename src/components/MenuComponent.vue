@@ -150,6 +150,27 @@
             >{{ MenuComponentEnum.SQLQueryBuilder }}</RouterLink
           >
         </li>
+        <li>
+          <RouterLink
+            to="/panel/cucumber-code"
+            :class="{ 'is-active': activePage === MenuComponentEnum.CucumberCode }"
+            >{{ MenuComponentEnum.CucumberCode }}</RouterLink
+          >
+        </li>
+        <li>
+          <RouterLink
+            to="/panel/automation-code"
+            :class="{ 'is-active': activePage === MenuComponentEnum.AutomationCode }"
+            >{{ MenuComponentEnum.AutomationCode }}</RouterLink
+          >
+        </li>
+        <li>
+          <RouterLink
+            to="/panel/testing-strategy"
+            :class="{ 'is-active': activePage === MenuComponentEnum.TestingStrategy }"
+            >{{ MenuComponentEnum.TestingStrategy }}</RouterLink
+          >
+        </li>
       </ul>
     </aside>
   </div>

@@ -1,6 +1,8 @@
 import APITestView from '@/views/panel/APITestView.vue';
+import AutomationCodeView from '@/views/panel/AutomationCodeView.vue';
 import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
+import CucumberCodeView from '@/views/panel/CucumberCodeView.vue';
 import DashboardView from '@/views/panel/DashboardView.vue';
 import GherkinLanguageView from '@/views/panel/GherkinLanguageView.vue';
 import HistoricDetailsView from '@/views/panel/HistoricDetailsView.vue';
@@ -18,6 +20,7 @@ import ShopView from '@/views/panel/ShopView.vue';
 import SQLQueryBuilderView from '@/views/panel/SQLQueryBuilderView.vue';
 import StepGeneratorView from '@/views/panel/StepGeneratorView.vue';
 import TestGeneratorView from '@/views/panel/TestGeneratorView.vue';
+import TestingStrategyView from '@/views/panel/TestingStrategyView.vue';
 import TestMassGeneratorView from '@/views/panel/TestMassGeneratorView.vue';
 import TestPlanView from '@/views/panel/TestPlanView.vue';
 import TestTranslatorView from '@/views/panel/TestTranslatorView.vue';
@@ -189,6 +192,24 @@ const router = createRouter({
       name: 'panel-settings',
       component: SettingsView,
       meta: { title: 'Auto test - Configurações' }
+    },
+    {
+      path: '/panel/cucumber-code',
+      name: 'panel-cucumber-code',
+      component: CucumberCodeView,
+      meta: { title: 'Auto test - Código Cucumber' }
+    },
+    {
+      path: '/panel/automation-code',
+      name: 'panel-automation-code',
+      component: AutomationCodeView,
+      meta: { title: 'Auto test - Código Frameworks de Automação' }
+    },
+    {
+      path: '/panel/testing-strategy',
+      name: 'panel-testing-strategy',
+      component: TestingStrategyView,
+      meta: { title: 'Auto test - Gerador de Estratégia de Testes' }
     }
   ]
 });

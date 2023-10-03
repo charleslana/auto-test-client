@@ -1,3 +1,4 @@
+import Clipboard from 'clipboard';
 import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import router from '@/router';
 import ToastEnum from '@/enum/ToastEnum';
@@ -68,7 +69,9 @@ export const removeOverflowHidden = () => {
 };
 
 export const formatBreakLines = (text: string): string => {
-  return text.replace(/\n/g, '<br>');
+  text = text.replace(/\n/g, '<br>');
+  text = text.replace(/```([\s\S]*?)```/g, '<code>$1</code>');
+  return text;
 };
 
 export function getMenuComponentTitle(type: string): string {
@@ -169,4 +172,17 @@ export function getInput(input: string | undefined): string | undefined {
     return undefined;
   }
   return input;
+}
+
+export function copyText(text: string): void {
+  const clipboard = new Clipboard('.copy-button', {
+    text: () => text
+  });
+  clipboard.on('success', (e) => {
+    e.clearSelection();
+    showToast('Texto copiado com sucesso!', ToastEnum.Success);
+  });
+  clipboard.on('error', () => {
+    showToast('Falha ao copiar o texto. Por favor, copie manualmente.', ToastEnum.Danger);
+  });
 }

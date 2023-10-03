@@ -151,6 +151,33 @@
                 <p class="subtitle">{{ MenuComponentEnum.SQLQueryBuilder }}</p>
               </article>
             </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.cucumberCode) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
+                <p class="subtitle">{{ MenuComponentEnum.CucumberCode }}</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.automationCode) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
+                <p class="subtitle">{{ MenuComponentEnum.AutomationCode }}</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.testingStrategy) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
+                <p class="subtitle">{{ MenuComponentEnum.TestingStrategy }}</p>
+              </article>
+            </div>
           </div>
         </section>
       </div>
@@ -291,7 +318,10 @@ function createEmptyTest(): ITest {
     securityTest: 0,
     performanceTest: 0,
     apiTest: 0,
-    sqlQueryBuilder: 0
+    sqlQueryBuilder: 0,
+    cucumberCode: 0,
+    automationCode: 0,
+    testingStrategy: 0
   };
 }
 

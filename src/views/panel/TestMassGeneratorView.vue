@@ -72,7 +72,14 @@
                 </button>
               </form>
               <div v-if="result != null">
-                <div class="is-size-1">Resultado:</div>
+                <div class="level">
+                  <div class="level-left"><div class="is-size-1">Resultado:</div></div>
+                  <div class="level-right">
+                    <button class="button copy-button" @click="copyToClipboard">
+                      Copiar Texto
+                    </button>
+                  </div>
+                </div>
                 <div v-html="formatBreakLines(result)"></div>
               </div>
             </div>
@@ -91,7 +98,7 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { onMounted, ref } from 'vue';
 import UserItemService from '@/service/UserItemService';
 import TestTypeEnum from '@/enum/TestTypeEnum';
-import { handlerError, formatBreakLines, scrollDown, validateInput } from '@/utils/utils';
+import { handlerError, formatBreakLines, scrollDown, validateInput, copyText } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
 import LoadingComponent from '@/components/LoadingComponent.vue';
@@ -107,7 +114,7 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.UsabilityTestCase)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.TestMassGenerator)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
@@ -171,6 +178,10 @@ async function send(): Promise<void> {
   } finally {
     loading.value = false;
   }
+}
+
+function copyToClipboard() {
+  copyText(result.value ?? '');
 }
 </script>
 

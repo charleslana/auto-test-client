@@ -3,36 +3,46 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.UsabilityTestCase"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.AutomationCode"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
-          :pageName="MenuComponentEnum.UsabilityTestCase"
+          :pageName="MenuComponentEnum.AutomationCode"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.UsabilityTestCase" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.AutomationCode" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.UsabilityTestCase }}</p>
+              <p class="title">{{ MenuComponentEnum.AutomationCode }}</p>
               <p class="subtitle">
-                Melhore a experiência do usuário com estes testes de usabilidade também conhecidos
-                por UX (User experience). Por favor, forneça-nos um trecho da documentação do
-                software ou um requisito específico que deseja validar.
+                Precisando de ajuda para automatizar seus testes? Esta é a ferramenta certa. Escolha
+                um framework, forneça a feature e o cenário a ser testado para gerar o código pra
+                você!
               </p>
               <form @submit.prevent="send">
                 <div class="field">
+                  <label class="label">Framework:</label>
+                  <div class="control">
+                    <div v-for="(f, index) in frameworks" :key="index">
+                      <label>
+                        <input type="radio" v-model="framework" :value="f" />
+                        {{ f }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
                   <label class="label"
-                    ><span class="has-text-danger">*</span> Requisito ou trecho da
-                    documentação:</label
+                    ><span class="has-text-danger">*</span> Feature (Funcionalidade):</label
                   >
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="requirement" required></textarea>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label">Contexto:</label>
+                  <label class="label">Cenário (em Gherkin):</label>
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="context"></textarea>
                   </div>
@@ -76,10 +86,10 @@ import TestTypeEnum from '@/enum/TestTypeEnum';
 import {
   handlerError,
   formatBreakLines,
-  validateInput,
   scrollDown,
-  getInput,
-  copyText
+  validateInput,
+  copyText,
+  getInput
 } from '@/utils/utils';
 import BlockedPageComponent from '@/components/BlockedPageComponent.vue';
 import OpenAIService from '@/service/OpenAIService';
@@ -95,17 +105,37 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.UsabilityTestCase)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.AutomationCode)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
   }
 }
 
-const requirement = ref('Realizar uma reserva de hotel em um aplicativo de viagens');
+const frameworks = ref([
+  'Playwright',
+  'Puppeteer',
+  'Selenium WebDriver',
+  'Cypress',
+  'Robot Framework',
+  'Protractor',
+  'TestCafe',
+  'Jest',
+  'Mocha',
+  'JUnit',
+  'PyTest',
+  'WebdriverIO',
+  'Jasmine'
+]);
+
+const framework = ref(frameworks.value[0]);
+
+const requirement = ref(
+  'Funcionalidade: Login no sistema\nComo um usuário Eu quero poder fazer login no sistema Para acessar as funcionalidades restritas'
+);
 
 const context = ref<string | undefined>(
-  'Imagine que você é um usuário que está utilizando um aplicativo de viagens para realizar uma reserva de hotel. O aplicativo permite que os usuários encontrem e reservem hotéis em diferentes destinos. O objetivo é fornecer uma experiência de reserva de hotel intuitiva e eficiente para os usuários, garantindo que eles possam encontrar facilmente opções de hotel adequadas às suas necessidades e concluir o processo de reserva de forma rápida e sem problemas.\n\n'
+  'Cenário: Login com sucesso\nDado que estou na página de login\nQuando eu preencher o campo "Nome de usuário" com "usuarioteste"\nE eu preencher o campo "Senha" com "senhateste"\nE eu clicar no botão "Login"\nEntão devo ser redirecionado para a página inicial'
 );
 
 const loading = ref(false);
@@ -121,7 +151,8 @@ async function send(): Promise<void> {
     const response = await OpenAIService.send({
       input: requirement.value,
       context: context.value,
-      type: TestTypeEnum.UsabilityTestCase
+      output: framework.value,
+      type: TestTypeEnum.AutomationCode
     });
     result.value = response.message;
     scrollDown();

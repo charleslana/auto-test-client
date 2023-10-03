@@ -46,3 +46,15 @@ body {
 .vue-skeletor--text {
   border-radius: 0 !important;
 }
+
+code {
+  display: block;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
