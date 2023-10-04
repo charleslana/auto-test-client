@@ -24,6 +24,7 @@
         <a class="navbar-item is-uppercase" href="#free">É grátis</a>
         <RouterLink to="/login" class="navbar-item is-uppercase">Login</RouterLink>
         <RouterLink to="/register" class="navbar-item is-uppercase">Criar conta</RouterLink>
+        <RouterLink to="/blog" class="navbar-item is-uppercase">Blog</RouterLink>
       </div>
     </div>
   </nav>

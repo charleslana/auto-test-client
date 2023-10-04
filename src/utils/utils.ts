@@ -186,3 +186,19 @@ export function copyText(text: string): void {
     showToast('Falha ao copiar o texto. Por favor, copie manualmente.', ToastEnum.Danger);
   });
 }
+
+export function truncateText(text: string, maxLength: number) {
+  if (text.length > maxLength) {
+    return text.slice(0, maxLength - 3) + '...';
+  } else {
+    return text;
+  }
+}
+
+export const formatDateToCustomFormat = (dateString: string): string => {
+  const date = new Date(Date.parse(dateString));
+  const day = new Intl.DateTimeFormat('pt-BR', { day: '2-digit' }).format(date);
+  const month = new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(date);
+  const year = new Intl.DateTimeFormat('pt-BR', { year: 'numeric' }).format(date);
+  return `${day} ${month} ${year}`;
+};

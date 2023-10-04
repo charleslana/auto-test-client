@@ -1,6 +1,5 @@
 import APITestView from '@/views/panel/APITestView.vue';
 import AutomationCodeView from '@/views/panel/AutomationCodeView.vue';
-import BlogView from '@/views/blog/BlogView.vue';
 import BugReportView from '@/views/panel/BugReportView.vue';
 import ConquestView from '@/views/panel/ConquestView.vue';
 import CucumberCodeView from '@/views/panel/CucumberCodeView.vue';
@@ -12,6 +11,7 @@ import HomeView from '@/views/HomeView.vue';
 import ItemsView from '@/views/panel/ItemsView.vue';
 import LoginView from '@/views/LoginView.vue';
 import PerformanceTestView from '@/views/panel/PerformanceTestView.vue';
+import PostView from '@/views/blog/PostView.vue';
 import QualityIndicatorView from '@/views/panel/QualityIndicatorView.vue';
 import RankView from '@/views/panel/RankView.vue';
 import RegisterView from '@/views/RegisterView.vue';
@@ -215,7 +215,7 @@ const router = createRouter({
     {
       path: '/blog',
       name: 'blog',
-      component: BlogView,
+      component: PostView,
       meta: { title: 'Auto test - Blog' }
     }
   ]
