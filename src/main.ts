@@ -8,6 +8,7 @@ import {
   faCircleInfo,
   faMagnifyingGlass,
   faMedal,
+  faPenToSquare,
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -28,7 +29,8 @@ library.add(
   faMedal,
   faCircleCheck,
   faArrowRight,
-  faArrowLeft
+  faArrowLeft,
+  faPenToSquare
 );
 
 const app = createApp(App);

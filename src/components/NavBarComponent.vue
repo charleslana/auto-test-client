@@ -18,6 +18,7 @@
           <RouterLink to="/panel/conquest" class="navbar-item">Conquistas</RouterLink>
           <RouterLink to="/panel/shop" class="navbar-item">Loja</RouterLink>
           <RouterLink to="/panel/rank" class="navbar-item">Classificação</RouterLink>
+          <RouterLink to="/blog" class="navbar-item">Blog</RouterLink>
           <a class="navbar-item" @click="logout">Logout</a>
         </div>
       </div>

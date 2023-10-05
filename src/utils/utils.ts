@@ -94,7 +94,8 @@ export const formatTextDate = (dateString: string): string => {
   const month = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(date);
   const day = new Intl.DateTimeFormat('pt-BR', { day: '2-digit' }).format(date);
   const hour = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit' }).format(date);
-  const minute = new Intl.DateTimeFormat('pt-BR', { minute: '2-digit' }).format(date);
+  // const minute = new Intl.DateTimeFormat('pt-BR', { minute: '2-digit' }).format(date);
+  const minute = date.getMinutes().toString().padStart(2, '0');
   return `${day} de ${month} de ${year} às ${hour}:${minute}`;
 };
 

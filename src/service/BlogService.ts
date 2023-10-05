@@ -18,4 +18,17 @@ export default class BlogService {
     const response = await api.get(`/post/${id}`);
     return response.data;
   }
+
+  static async getCommentsPaginated(postId: string, page = 1) {
+    const response = await api.get(`/comment?postId=${postId}&page=${page}`);
+    return response.data;
+  }
+
+  static async sendComment(postId: number, message: string) {
+    const response = await api.post('/comment', {
+      postId: postId,
+      message: message
+    });
+    return response.data;
+  }
 }
