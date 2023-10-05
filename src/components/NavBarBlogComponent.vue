@@ -18,15 +18,18 @@
       </div>
       <div id="navbarMenu" class="navbar-menu" :class="{ 'is-active': isMenuOpen }">
         <div class="navbar-end">
-          <div class="navbar-item">
+          <div v-if="!isDetails" class="navbar-item">
             <div class="control has-icons-left">
               <input
                 class="input is-rounded"
-                type="email"
-                placeholder="Pesquisar em breve"
-                disabled
+                type="text"
+                v-model="searchTerm"
+                @keydown.enter="setSearchTerm"
+                placeholder="Pesquisar por título"
               />
-              <span class="icon is-left"></span>
+              <span class="icon is-left">
+                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+              </span>
             </div>
           </div>
           <RouterLink to="/blog" class="navbar-item is-size-5 has-text-weight-semibold"
@@ -43,12 +46,30 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useSearchStore } from '@/store/searchStore';
 
 const isMenuOpen = ref(false);
+const searchTerm = ref('');
+const searchStore = useSearchStore();
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const setSearchTerm = () => {
+  searchStore.setSearchTerm(searchTerm.value);
+};
+
+defineProps({
+  isDetails: {
+    type: Boolean
+  }
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+nav.navbar {
+  height: 6rem !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+</style>

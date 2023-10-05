@@ -7,4 +7,15 @@ export default class BlogService {
     const response = await api.get(url);
     return response.data;
   }
+
+  static async searchByTitle(text: string) {
+    const url = `/post/search/by?title=${text}`;
+    const response = await api.get(url);
+    return response.data;
+  }
+
+  static async get(id: string) {
+    const response = await api.get(`/post/${id}`);
+    return response.data;
+  }
 }

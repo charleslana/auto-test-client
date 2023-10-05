@@ -11,6 +11,7 @@ import HomeView from '@/views/HomeView.vue';
 import ItemsView from '@/views/panel/ItemsView.vue';
 import LoginView from '@/views/LoginView.vue';
 import PerformanceTestView from '@/views/panel/PerformanceTestView.vue';
+import PostDetailsView from '@/views/blog/PostDetailsView.vue';
 import PostView from '@/views/blog/PostView.vue';
 import QualityIndicatorView from '@/views/panel/QualityIndicatorView.vue';
 import RankView from '@/views/panel/RankView.vue';
@@ -217,6 +218,12 @@ const router = createRouter({
       name: 'blog',
       component: PostView,
       meta: { title: 'Auto test - Blog' }
+    },
+    {
+      path: '/blog/:id',
+      name: 'blog-details',
+      component: PostDetailsView,
+      meta: { title: 'Auto test - Detalhes da postagem' }
     }
   ]
 });
