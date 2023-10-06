@@ -58,3 +58,10 @@ code {
   line-height: 1.4;
   margin-bottom: 20px;
 }
+
+.no-pointer {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: inherit;
+}

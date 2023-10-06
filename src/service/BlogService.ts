@@ -31,4 +31,22 @@ export default class BlogService {
     });
     return response.data;
   }
+
+  static async getAllComments() {
+    const response = await api.get('/comment/all/me');
+    return response.data;
+  }
+
+  static async update(id: number, message: string) {
+    const response = await api.put('/comment', {
+      id: id,
+      message: message
+    });
+    return response.data;
+  }
+
+  static async delete(id: string) {
+    const response = await api.delete(`/comment/${id}`);
+    return response.data;
+  }
 }
