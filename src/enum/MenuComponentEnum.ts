@@ -19,7 +19,8 @@ enum MenuComponentEnum {
   SQLQueryBuilder = 'Construtor de Query SQL',
   CucumberCode = 'Código Cucumber',
   AutomationCode = 'Código Frameworks de Automação',
-  TestingStrategy = 'Gerador de Estratégia de Testes'
+  TestingStrategy = 'Gerador de Estratégia de Testes',
+  LoadTesting = 'Gerador de Teste de Carga'
 }
 
 export default MenuComponentEnum;

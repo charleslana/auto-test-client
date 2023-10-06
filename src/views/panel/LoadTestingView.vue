@@ -3,23 +3,23 @@
   <div class="container">
     <div class="columns">
       <div class="column is-3">
-        <MenuComponent :activePage="MenuComponentEnum.AutomationCode"></MenuComponent>
+        <MenuComponent :activePage="MenuComponentEnum.LoadTesting"></MenuComponent>
       </div>
       <div class="column is-9">
         <BreadCrumbComponent
           :links="[{ to: '/panel/test-plan', name: 'Ferramentas avançadas' }]"
-          :pageName="MenuComponentEnum.AutomationCode"
+          :pageName="MenuComponentEnum.LoadTesting"
         ></BreadCrumbComponent>
         <LoadingComponent :loading="loadingItem" />
         <div v-if="!loadingItem">
-          <BlockedPageComponent :pageName="MenuComponentEnum.AutomationCode" v-if="!open" />
+          <BlockedPageComponent :pageName="MenuComponentEnum.LoadTesting" v-if="!open" />
           <section class="hero" v-if="open">
             <div class="hero-body">
-              <p class="title">{{ MenuComponentEnum.AutomationCode }}</p>
+              <p class="title">{{ MenuComponentEnum.LoadTesting }}</p>
               <p class="subtitle">
-                Precisando de ajuda para automatizar seus testes? Esta é a ferramenta certa. Escolha
-                um framework, forneça a feature e o cenário a ser testado para gerar o código para
-                você!
+                Precisando de ajuda para realizar testes de cargas? Esta é a ferramenta certa.
+                Escolha um framework, forneça a feature e o cenário a ser realizado a carga para
+                gerar o código para você!
               </p>
               <form @submit.prevent="send">
                 <div class="field">
@@ -42,7 +42,7 @@
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label">Cenário (em Gherkin):</label>
+                  <label class="label">Cenário:</label>
                   <div class="control">
                     <textarea class="textarea is-medium" v-model="context"></textarea>
                   </div>
@@ -105,28 +105,14 @@ const open = ref(false);
 
 async function validateItem(): Promise<void> {
   try {
-    open.value = (await UserItemService.validateItem(TestTypeEnum.AutomationCode)) as boolean;
+    open.value = (await UserItemService.validateItem(TestTypeEnum.LoadTesting)) as boolean;
     loadingItem.value = false;
   } catch (error: any) {
     handlerError(error);
   }
 }
 
-const frameworks = ref([
-  'Playwright',
-  'Puppeteer',
-  'Selenium WebDriver',
-  'Cypress',
-  'Robot Framework',
-  'Protractor',
-  'TestCafe',
-  'Jest',
-  'Mocha',
-  'JUnit',
-  'PyTest',
-  'WebdriverIO',
-  'Jasmine'
-]);
+const frameworks = ref(['k6 (Javascript)', 'Artillery', 'Apache JMeter (Java)', 'Vegeta (Go)']);
 
 const framework = ref(frameworks.value[0]);
 
@@ -135,7 +121,7 @@ const requirement = ref(
 );
 
 const context = ref<string | undefined>(
-  'Cenário: Login com sucesso\nDado que estou na página de login\nQuando eu preencher o campo "Nome de usuário" com "usuarioteste"\nE eu preencher o campo "Senha" com "senhateste"\nE eu clicar no botão "Login"\nEntão devo ser redirecionado para a página inicial'
+  'Cenário: Login com sucesso\nDeve ter uma duração de 60 segundos com uma capacidade de 1000 usuários'
 );
 
 const loading = ref(false);
@@ -152,7 +138,7 @@ async function send(): Promise<void> {
       input: requirement.value,
       context: context.value,
       output: framework.value,
-      type: TestTypeEnum.AutomationCode
+      type: TestTypeEnum.LoadTesting
     });
     result.value = response.message;
     scrollDown();

@@ -15,4 +15,5 @@ export default interface ITest {
   cucumberCode: number;
   automationCode: number;
   testingStrategy: number;
+  loadTesting: number;
 }

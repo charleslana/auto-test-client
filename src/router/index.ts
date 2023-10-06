@@ -9,6 +9,7 @@ import HistoricDetailsView from '@/views/panel/HistoricDetailsView.vue';
 import HistoricView from '@/views/panel/HistoricView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ItemsView from '@/views/panel/ItemsView.vue';
+import LoadTestingView from '@/views/panel/LoadTestingView.vue';
 import LoginView from '@/views/LoginView.vue';
 import PerformanceTestView from '@/views/panel/PerformanceTestView.vue';
 import PostDetailsView from '@/views/blog/PostDetailsView.vue';
@@ -212,6 +213,12 @@ const router = createRouter({
       name: 'panel-testing-strategy',
       component: TestingStrategyView,
       meta: { title: 'Auto test - Gerador de Estratégia de Testes' }
+    },
+    {
+      path: '/panel/load-testing',
+      name: 'panel-load-testing',
+      component: LoadTestingView,
+      meta: { title: 'Auto test - Gerador de Teste de Carga' }
     },
     {
       path: '/blog',

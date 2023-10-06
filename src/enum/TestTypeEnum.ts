@@ -14,7 +14,8 @@ enum TestTypeEnum {
   SQLQueryBuilder = 'sqlQueryBuilder',
   CucumberCode = 'cucumberCode',
   AutomationCode = 'automationCode',
-  TestingStrategy = 'testingStrategy'
+  TestingStrategy = 'testingStrategy',
+  LoadTesting = 'loadTesting'
 }
 
 export default TestTypeEnum;

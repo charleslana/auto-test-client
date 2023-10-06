@@ -180,6 +180,19 @@
             </div>
           </div>
         </section>
+        <section class="info-tiles">
+          <div class="tile is-ancestor has-text-centered">
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title" v-if="!loadingCount">
+                  {{ formatCompactNumber(response.loadTesting) }}
+                </p>
+                <p class="title" v-if="loadingCount"><Skeletor /></p>
+                <p class="subtitle">{{ MenuComponentEnum.LoadTesting }}</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -339,7 +352,8 @@ function createEmptyTest(): ITest {
     sqlQueryBuilder: 0,
     cucumberCode: 0,
     automationCode: 0,
-    testingStrategy: 0
+    testingStrategy: 0,
+    loadTesting: 0
   };
 }
 

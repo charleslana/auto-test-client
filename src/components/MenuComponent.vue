@@ -171,6 +171,13 @@
             >{{ MenuComponentEnum.TestingStrategy }}</RouterLink
           >
         </li>
+        <li>
+          <RouterLink
+            to="/panel/load-testing"
+            :class="{ 'is-active': activePage === MenuComponentEnum.LoadTesting }"
+            >{{ MenuComponentEnum.LoadTesting }}</RouterLink
+          >
+        </li>
       </ul>
     </aside>
   </div>

@@ -80,21 +80,7 @@
                           </p>
                           <div v-html="formatBreakLines(comment.message)"></div>
                         </div>
-                        <!-- <nav class="level is-mobile">
-                          <div class="level-left">
-                            <a class="level-item">
-                              <span class="icon is-small">
-                                <font-awesome-icon :icon="['fas', 'pen-to-square']" />
-                              </span>
-                            </a>
-                          </div>
-                        </nav> -->
                       </div>
-                      <!-- <div class="media-right">
-                        <button class="button">
-                          <font-awesome-icon :icon="['fas', 'trash']" class="has-text-danger" />
-                        </button>
-                      </div> -->
                     </article>
                     <div class="box has-text-centered mt-5">
                       <button
