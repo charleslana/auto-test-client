@@ -219,6 +219,23 @@
       </section>
     </div>
   </div>
+  <div class="modal" :class="{ 'is-active': success }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Parabéns</p>
+      </header>
+      <section class="modal-card-body">
+        <p>
+          Seja bem vindo {{ name }}, você adquiriu 5.000 pontos para gastar na loja, descubra várias
+          ferramentas e comece agora!
+        </p>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button" @click="success = false">Começar!</button>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -229,9 +246,8 @@ import MenuComponentEnum from '@/enum/MenuComponentEnum';
 import { ref, onMounted } from 'vue';
 import { formatCompactNumber } from '@/utils/utils';
 import UserService from '@/service/UserService';
-import { handlerError, showToast, addOverflowHidden, removeOverflowHidden } from '@/utils/utils';
+import { handlerError, addOverflowHidden, removeOverflowHidden } from '@/utils/utils';
 import type IUser from '@/interface/IUser';
-import ToastEnum from '@/enum/ToastEnum';
 import type ITest from '@/interface/ITest';
 import { Skeletor } from 'vue-skeletor';
 
@@ -265,6 +281,8 @@ async function getUserDetails(): Promise<void> {
 
 const beginner = ref(false);
 
+const success = ref(false);
+
 function showUserNameModal(getName: string | null): void {
   if (getName == null) {
     addOverflowHidden();
@@ -282,10 +300,10 @@ async function updateUserName(): Promise<void> {
   try {
     validateUserName(newName.value);
     loading.value = true;
-    const response = await UserService.updateName(newName.value);
-    showToast(response.message, ToastEnum.Success);
+    await UserService.updateName(newName.value);
     beginner.value = false;
     name.value = newName.value;
+    success.value = true;
   } catch (error: any) {
     loading.value = false;
     handlerError(error);
