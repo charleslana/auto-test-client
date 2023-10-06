@@ -37,7 +37,7 @@
                 <div class="column is-8 is-offset-2">
                   <div class="is-divider"></div>
                   <div class="is-size-3 mb-5">Comentários</div>
-                  <div class="box" v-if="getTokenFromLocalStorage() != null">
+                  <div class="box" v-if="getTokenFromLocalStorage() != null && result.enable">
                     <div class="field">
                       <p class="control">
                         <textarea
